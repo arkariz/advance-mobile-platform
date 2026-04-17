@@ -1,0 +1,12 @@
+name: mobile-platform
+environment:
+  sdk: ">=3.11.0 <4.0.0"
+  
+dev_dependencies:
+  melos: ^7.5.1
+
+workspace:
+  - packages/*
+
+melos:
+  sdkPath: .fvm/flutter_sdk
