@@ -5,3 +5,7 @@
 # dart
 .dart_tool/
 pubspec.lock
+
+# idea
+.idea/
+*.iml
