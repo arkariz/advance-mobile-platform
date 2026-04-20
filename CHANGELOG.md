@@ -15,6 +15,27 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`dependencies` - `v1.1.0`](#dependencies---v110)
+
+---
+
+#### `dependencies` - `v1.1.0`
+
+ - **FEAT**(dependencies): add shared dependencies package with initial configuration and documentation.
+
+
+## 2026-04-20
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`linter` - `v1.0.1`](#linter---v101)
 
 ---
