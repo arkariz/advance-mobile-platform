@@ -1,6 +1,6 @@
 name: linter
 description: "A shared package for managing linting rules across the workspace."
-version: 1.0.0
+version: 1.0.1
 
 resolution: workspace
 
