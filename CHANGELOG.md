@@ -15,6 +15,27 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`failures` - `v1.1.0`](#failures---v110)
+
+---
+
+#### `failures` - `v1.1.0`
+
+ - **FEAT**(failures): implement core failure model with detailed error handling and recovery options.
+
+
+## 2026-04-20
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`response` - `v1.1.0`](#response---v110)
 
 ---
