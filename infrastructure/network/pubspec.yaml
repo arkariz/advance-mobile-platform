@@ -1,0 +1,35 @@
+name: network
+description: "Network module for handling API calls and network-related operations."
+version: 1.0.0
+publish_to: none
+
+resolution: workspace
+
+environment:
+  sdk: ^3.11.4
+  flutter: ">=1.17.0"
+
+dependencies:
+  dependencies:
+    git:
+      url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
+      ref: dependencies-v1.1.0
+  failures:
+    git:
+      url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
+      ref: failures-v1.1.0
+  flutter:
+    sdk: flutter
+  response:
+    git:
+      url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
+      ref: response-v1.1.0
+  
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  linter:
+    git:
+      url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
+      ref: linter-v1.0.1
