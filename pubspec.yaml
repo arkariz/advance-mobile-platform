@@ -10,6 +10,7 @@ dev_dependencies:
 
 workspace:
   - core/**
+  - infrastructure/**
   - shared/**
 
 melos:
