@@ -9,6 +9,7 @@ dev_dependencies:
   retrofit_generator: ^10.2.5
 
 workspace:
+  - core/**
   - shared/**
 
 melos:
