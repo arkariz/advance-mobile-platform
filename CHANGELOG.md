@@ -15,6 +15,27 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`response` - `v1.1.0`](#response---v110)
+
+---
+
+#### `response` - `v1.1.0`
+
+ - **FEAT**(response): feat create api error, object, and paginated response.
+
+
+## 2026-04-20
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`dependencies` - `v1.1.0`](#dependencies---v110)
 
 ---
