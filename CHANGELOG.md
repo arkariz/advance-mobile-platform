@@ -15,6 +15,27 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`network` - `v1.1.0`](#network---v110)
+
+---
+
+#### `network` - `v1.1.0`
+
+ - **FEAT**(network): create dio network adapter & failure mapper.
+
+
+## 2026-04-20
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`failures` - `v1.1.0`](#failures---v110)
 
 ---
