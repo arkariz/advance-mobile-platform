@@ -13,16 +13,19 @@ dependencies:
   dependencies:
     git:
       url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
+      path: shared/dependencies
       ref: dependencies-v1.1.0
   failures:
     git:
       url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
+      path: core/failures
       ref: failures-v1.1.0
   flutter:
     sdk: flutter
   response:
     git:
       url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
+      path: core/response
       ref: response-v1.1.0
   
 
