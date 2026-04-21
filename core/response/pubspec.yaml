@@ -13,7 +13,8 @@ dependencies:
   dependencies:
     git:
       url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
-      ref: dependencies-v1.0.0
+      path: shared/dependencies
+      ref: dependencies-v1.1.0
   flutter:
     sdk: flutter
 
