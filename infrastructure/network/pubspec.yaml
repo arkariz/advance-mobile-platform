@@ -13,16 +13,19 @@ dependencies:
   dependencies:
     git:
       url: https://github.com/arkariz/advance-mobile-platform
+      path: shared/dependencies
       ref: dependencies-v1.1.0
   failures:
     git:
       url: https://github.com/arkariz/advance-mobile-platform
+      path: core/failures
       ref: failures-v1.1.0
   flutter:
     sdk: flutter
   response:
     git:
       url: https://github.com/arkariz/advance-mobile-platform
+      path: core/response
       ref: response-v1.1.0
   
 
