@@ -1,5 +1,5 @@
-name: response
-description: "A shared package for handling API responses, including error handling and pagination, to ensure consistent response structures across the application."
+name: api_network
+description: "API contract layer — exposes response models so feature/data layers do not depend on implementation packages like dio_network."
 version: 1.1.2
 publish_to: none
 
@@ -17,6 +17,11 @@ dependencies:
       ref: dependencies-v1.2.0
   flutter:
     sdk: flutter
+  models:
+    git:
+      url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
+      path: core/models
+      ref: models-v1.0.0
 
 dev_dependencies:
   build_runner: any

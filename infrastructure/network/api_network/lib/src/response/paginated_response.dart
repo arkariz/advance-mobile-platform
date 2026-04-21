@@ -4,7 +4,7 @@ part 'paginated_response.g.dart';
 
 /// A generic response model for paginated data, containing a list of items of type [T],
 /// pagination details, and optional status code and error information.
-@JsonSerializable(genericArgumentFactories: true)
+@JsonSerializable(genericArgumentFactories: true, createToJson: true)
 class PaginatedResponse<T> {
   /// Creates an instance of [PaginatedResponse] with the given parameters.
   PaginatedResponse({
@@ -20,6 +20,10 @@ class PaginatedResponse<T> {
     T Function(Object? json) fromJsonT,
   ) => _$PaginatedResponseFromJson(json, fromJsonT);
 
+  /// Converts the [PaginatedResponse] instance to a JSON map, using a provided function to serialize the data of type [T].
+  Map<String, dynamic> toJson() => _$PaginatedResponseToJson(this, (value) => value);
+
+
   /// The HTTP status code of the response, if available.
   @JsonKey(name: 'code')
   final int? statusCode;
@@ -33,7 +37,7 @@ class PaginatedResponse<T> {
 
 /// A model representing pagination details, including total items, total pages,
 /// current page, and items per page.
-@JsonSerializable()
+@JsonSerializable(createToJson: true)
 class PaginationResponse {
   /// Creates an instance of [PaginationResponse] with the given parameters.
   PaginationResponse({
@@ -45,6 +49,9 @@ class PaginationResponse {
 
   /// Creates an instance of [PaginationResponse] from a JSON map.
   factory PaginationResponse.fromJson(Map<String, dynamic> json) => _$PaginationResponseFromJson(json);
+
+  /// Converts the [PaginationResponse] instance to a JSON map.
+  Map<String, dynamic> toJson() => _$PaginationResponseToJson(this);
 
   /// The total number of items available across all pages.
   final int? totalItems;
