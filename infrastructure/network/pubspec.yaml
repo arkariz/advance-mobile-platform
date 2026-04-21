@@ -1,6 +1,6 @@
 name: network
 description: "Network module for handling API calls and network-related operations."
-version: 1.1.0
+version: 1.1.1
 publish_to: none
 
 resolution: workspace
@@ -26,7 +26,7 @@ dependencies:
     git:
       url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
       path: core/response
-      ref: response-v1.1.0
+      ref: response-v1.1.1
   
 
 dev_dependencies:

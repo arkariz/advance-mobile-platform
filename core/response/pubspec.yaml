@@ -1,6 +1,6 @@
 name: response
 description: "A shared package for handling API responses, including error handling and pagination, to ensure consistent response structures across the application."
-version: 1.1.0
+version: 1.1.1
 publish_to: none
 
 resolution: workspace
