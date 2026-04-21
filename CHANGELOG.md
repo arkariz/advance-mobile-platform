@@ -15,6 +15,27 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`dio_network` - `v1.2.0`](#dio_network---v120)
+
+---
+
+#### `dio_network` - `v1.2.0`
+
+ - **FEAT**(dio_network): refactor directory form infrastructure/network into infrastructure/network/dio_network.
+
+
+## 2026-04-21
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`network` - `v1.1.1`](#network---v111)
  - [`response` - `v1.1.1`](#response---v111)
 
