@@ -1,3 +1,7 @@
+## 1.2.1
+
+ - Update a dependency to the latest release.
+
 ## 1.2.0
 
  - **FEAT**(dio_network): refactor directory form infrastructure/network into infrastructure/network/dio_network.
