@@ -10,6 +10,11 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  api_network:
+    git:
+      url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
+      path: infrastructure/network/api_network
+      ref: api_network-v1.0.0
   dependencies:
     git:
       url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
@@ -22,11 +27,6 @@ dependencies:
       ref: failures-v1.1.0
   flutter:
     sdk: flutter
-  response:
-    git:
-      url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
-      path: core/response
-      ref: response-v1.1.2
   
 
 dev_dependencies:
