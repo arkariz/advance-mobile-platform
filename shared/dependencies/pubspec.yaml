@@ -9,5 +9,6 @@ environment:
 
 dependencies:
   dio: ^5.9.2
+  equatable: ^2.0.8
   json_annotation: ^4.11.0
   retrofit: ^4.9.2
