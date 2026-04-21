@@ -15,6 +15,36 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`dependencies` - `v1.2.0`](#dependencies---v120)
+ - [`response` - `v1.1.2`](#response---v112)
+ - [`dio_network` - `v1.2.1`](#dio_network---v121)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `response` - `v1.1.2`
+ - `dio_network` - `v1.2.1`
+
+---
+
+#### `dependencies` - `v1.2.0`
+
+ - **FEAT**(dependencies): add equatable.
+
+
+## 2026-04-21
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`dio_network` - `v1.2.0`](#dio_network---v120)
 
 ---
