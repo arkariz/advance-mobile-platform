@@ -1,6 +1,6 @@
 import 'package:dependencies/dependencies.dart';
+import 'package:dio_network/src/dio_failure_mapper.dart';
 import 'package:failures/failures.dart';
-import 'package:network/src/dio/dio_failure_mapper.dart';
 
 /// `RestApiHandler` implementation for Dio-based clients.
 ///
