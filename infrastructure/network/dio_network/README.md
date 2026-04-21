@@ -1,4 +1,4 @@
-# network
+# dio_network
 
 Network infrastructure package built on Dio.
 
