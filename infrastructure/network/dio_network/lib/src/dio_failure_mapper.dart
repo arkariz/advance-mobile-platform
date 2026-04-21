@@ -1,6 +1,6 @@
+import 'package:api_network/api_network.dart';
 import 'package:dependencies/dependencies.dart';
 import 'package:failures/failures.dart';
-import 'package:response/response.dart';
 
 /// Maps [DioException] instances to domain [Failure] objects.
 ///

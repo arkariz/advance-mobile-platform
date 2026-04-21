@@ -1,8 +1,9 @@
+import 'package:api_network/api_network.dart';
 import 'package:dependencies/dependencies.dart';
 import 'package:dio_network/src/dio_failure_mapper.dart';
 import 'package:failures/failures.dart';
 
-/// `RestApiHandler` implementation for Dio-based clients.
+/// `NetworkCallHandler` implementation for Dio-based clients.
 ///
 /// Executes the provided request callback and maps any [DioException]
 /// to domain [Failure] instances using [DioFailureMapper].
@@ -10,15 +11,15 @@ import 'package:failures/failures.dart';
 /// ## Usage
 ///
 /// ```dart
-/// final rest = DioRestHandler();
+/// final handler = DioRestHandler();
 ///
-/// final profile = await rest.handle(() async {
+/// final profile = await handler.handle(() async {
 ///   final response = await dio.get<Map<String, dynamic>>('/me');
 ///   return response.data ?? <String, dynamic>{};
 /// });
 /// ```
 // ignore_for_file: only_throw_errors
-class DioRestHandler implements RestApiHandler {
+class DioRestHandler implements NetworkCallHandler {
   @override
   Future<T> handle<T>(Future<T> Function() apiCall) async {
     try {
