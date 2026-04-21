@@ -1,3 +1,7 @@
+## 1.2.0
+
+ - **FEAT**(dio_network): refactor directory form infrastructure/network into infrastructure/network/dio_network.
+
 ## 1.1.1
 
  - **FIX**(network): correct path for dependencies in pubspec.yaml.
