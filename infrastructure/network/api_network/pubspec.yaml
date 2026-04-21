@@ -1,6 +1,6 @@
 name: api_network
 description: "API contract layer — exposes response models so feature/data layers do not depend on implementation packages like dio_network."
-version: 1.1.2
+version: 1.2.0
 publish_to: none
 
 resolution: workspace
@@ -21,7 +21,7 @@ dependencies:
     git:
       url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
       path: core/models
-      ref: models-v1.0.0
+      ref: models-v1.1.0
 
 dev_dependencies:
   build_runner: any
