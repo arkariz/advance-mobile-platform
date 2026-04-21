@@ -15,3 +15,6 @@ workspace:
 
 melos:
   sdkPath: .fvm/flutter_sdk
+  command:
+    version:
+      updateGitTagRefs: true
