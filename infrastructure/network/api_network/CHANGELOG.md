@@ -1,3 +1,7 @@
+## 1.2.0
+
+ - **FEAT**(api_network): refactor directory form core/response into infrastructure/network/api_network.
+
 ## 1.1.2
 
  - Update a dependency to the latest release.

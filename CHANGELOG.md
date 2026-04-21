@@ -11,6 +11,41 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 Packages with breaking changes:
 
+ - [`failures` - `v2.0.0`](#failures---v200)
+
+Packages with other changes:
+
+ - [`api_network` - `v1.2.0`](#api_network---v120)
+ - [`dio_network` - `v1.3.0`](#dio_network---v130)
+ - [`models` - `v1.1.0`](#models---v110)
+
+---
+
+#### `failures` - `v2.0.0`
+
+ - **BREAKING** **FEAT**(failures): remove RestApiHandler and related documentation.
+
+#### `api_network` - `v1.2.0`
+
+ - **FEAT**(api_network): refactor directory form core/response into infrastructure/network/api_network.
+
+#### `dio_network` - `v1.3.0`
+
+ - **FEAT**(dio_network): update imports and refactor RestApiHandler to NetworkCallHandler.
+
+#### `models` - `v1.1.0`
+
+ - **FEAT**(models): add core models package with pagination support and tests.
+
+
+## 2026-04-21
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
  - There are no breaking changes in this release.
 
 Packages with other changes:
