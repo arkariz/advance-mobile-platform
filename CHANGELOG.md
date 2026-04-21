@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2026-04-21
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`network` - `v1.1.1`](#network---v111)
+ - [`response` - `v1.1.1`](#response---v111)
+
+---
+
+#### `network` - `v1.1.1`
+
+ - **FIX**(network): correct path for dependencies in pubspec.yaml.
+
+#### `response` - `v1.1.1`
+
+ - **FIX**(response): correct path for shared dependencies in pubspec.yaml.
+
+
 ## 2026-04-20
 
 ### Changes
