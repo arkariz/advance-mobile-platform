@@ -1,6 +1,6 @@
 name: models
 description: "A Flutter package for core models."
-version: 1.1.0
+version: 1.1.1
 publish_to: none
 
 resolution: workspace
@@ -13,7 +13,7 @@ dependencies:
     git:
       url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
       path: shared/dependencies
-      ref: dependencies-v1.2.0
+      ref: dependencies-v1.3.0
 
 dev_dependencies:
   flutter_test:
@@ -21,4 +21,4 @@ dev_dependencies:
   linter:
     git:
       url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
-      ref: linter-v1.0.1
+      ref: linter-v1.0.2
