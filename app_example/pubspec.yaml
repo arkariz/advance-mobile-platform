@@ -16,12 +16,12 @@ dependencies:
     git:
       url: https://github.com/arkariz/advance-mobile-platform
       path: infrastructure/network/api_network
-      ref: api_network-v1.2.0
+      ref: api_network-v1.2.1
   dependencies:
     git:
       url: https://github.com/arkariz/advance-mobile-platform
       path: shared/dependencies
-      ref: dependencies-v1.2.0
+      ref: dependencies-v1.3.0
   di:
     git:
       url: https://github.com/arkariz/advance-mobile-platform
@@ -31,7 +31,7 @@ dependencies:
     git:
       url: https://github.com/arkariz/advance-mobile-platform
       path: infrastructure/network/dio_network
-      ref: dio_network-v1.3.0
+      ref: dio_network-v1.3.1
   failures:
     git:
       url: https://github.com/arkariz/advance-mobile-platform

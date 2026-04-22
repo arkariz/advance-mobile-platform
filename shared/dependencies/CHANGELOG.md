@@ -1,3 +1,7 @@
+## 1.3.0
+
+ - **FEAT**(dependencies): add fpdart package to dependencies and exports.
+
 ## 1.2.0
 
  - **FEAT**(dependencies): add equatable.

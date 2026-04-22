@@ -15,6 +15,43 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`dependencies` - `v1.3.0`](#dependencies---v130)
+ - [`linter` - `v1.0.2`](#linter---v102)
+ - [`models` - `v1.1.1`](#models---v111)
+ - [`dio_network` - `v1.3.1`](#dio_network---v131)
+ - [`api_network` - `v1.2.1`](#api_network---v121)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `models` - `v1.1.1`
+ - `dio_network` - `v1.3.1`
+ - `api_network` - `v1.2.1`
+
+---
+
+#### `dependencies` - `v1.3.0`
+
+ - **FEAT**(dependencies): add fpdart package to dependencies and exports.
+
+#### `linter` - `v1.0.2`
+
+ - **FIX**(linter): ensure comment_references rule is set to false.
+
+
+## 2026-04-22
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`di` - `v1.1.0`](#di---v110)
 
 ---
