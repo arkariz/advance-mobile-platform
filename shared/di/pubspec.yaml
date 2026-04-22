@@ -1,6 +1,6 @@
 name: di
 description: "Reusable DI framework — IsolatedScope base class, ScopeProvider InheritedWidget, and ScopeWidget lifecycle manager."
-version: 1.0.0
+version: 1.1.0
 publish_to: none
 
 resolution: workspace

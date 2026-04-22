@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2026-04-22
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`di` - `v1.1.0`](#di---v110)
+
+---
+
+#### `di` - `v1.1.0`
+
+ - **FEAT**(di): add initial implementation of dependency injection framework with core components.
+
+
 ## 2026-04-21
 
 ### Changes
