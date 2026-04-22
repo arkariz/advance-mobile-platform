@@ -1,0 +1,23 @@
+name: di
+description: "Reusable DI framework — IsolatedScope base class, ScopeProvider InheritedWidget, and ScopeWidget lifecycle manager."
+version: 1.0.0
+publish_to: none
+
+resolution: workspace
+
+environment:
+  sdk: ^3.11.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  get_it: ^9.2.1
+  injectable: ^3.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  linter:
+    git:
+      url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
+      ref: linter-v1.0.1
