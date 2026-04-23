@@ -41,7 +41,7 @@ dependencies:
     git:
       url: https://github.com/arkariz/advance-mobile-platform
       path: fondation/state_management
-      ref: state_management-v1.0.0
+      ref: state_management-v1.1.0
 
 dev_dependencies:
   flutter_test:
