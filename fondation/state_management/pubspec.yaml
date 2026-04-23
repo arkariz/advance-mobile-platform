@@ -1,0 +1,28 @@
+name: state_management
+description: "A Flutter package for state management using the BLoC pattern. This package provides a structured way to manage state in Flutter applications, making it easier to maintain and scale your app's architecture."
+version: 1.0.0
+publish_to: none
+
+resolution: workspace
+
+environment:
+  sdk: ^3.11.0
+  flutter: ">=1.17.0"
+
+dependencies:
+  dependencies:
+    git:
+      url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
+      ref: dependencies-v1.2.0
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^9.1.1
+  talker_flutter: ^5.1.16
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  linter:
+    git:
+      url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
+      ref: linter-v1.0.2
