@@ -14,7 +14,6 @@ import 'package:dio_network/dio_network.dart' as _i347;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
-import '../analytics/analytics_service.dart' as _i726;
 import 'root_module.dart' as _i126;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -32,9 +31,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i347.Dio>(() => rootModule.dio());
     gh.lazySingleton<_i976.NetworkCallHandler>(
       () => rootModule.authNetworkCallHandler(),
-    );
-    gh.lazySingleton<_i726.AnalyticsService>(
-      () => rootModule.analyticsService(),
     );
     return this;
   }
