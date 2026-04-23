@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2026-04-23
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`state_management` - `v1.1.0`](#state_management---v110)
+
+---
+
+#### `state_management` - `v1.1.0`
+
+ - **FEAT**: add initial state management package with BLoC pattern implementation.
+
+
 ## 2026-04-22
 
 ### Changes
