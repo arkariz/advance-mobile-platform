@@ -37,6 +37,11 @@ dependencies:
       url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
       path: core/failures
       ref: failures-v2.0.0
+  state_management:
+    git:
+      url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
+      path: fondation/state_management
+      ref: state_management-v1.0.0
 
 dev_dependencies:
   flutter_test:

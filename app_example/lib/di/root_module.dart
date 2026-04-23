@@ -1,4 +1,3 @@
-import 'package:app_example/analytics/analytics_service.dart';
 import 'package:dio_network/dio_network.dart';
 import 'package:api_network/api_network.dart';
 import 'package:di/di.dart';
@@ -16,9 +15,6 @@ abstract class RootModule {
   
   @lazySingleton
   NetworkCallHandler authNetworkCallHandler() => DioRestHandler();
-
-  @lazySingleton
-  AnalyticsService analyticsService() => AnalyticsService();
 
   // ── Async pre-resolved ────────────────────────────────────────────
   @singleton

@@ -1,11 +1,10 @@
 import 'package:api_network/api_network.dart';
+import 'package:app_example/features/auth/api/auth_repository.dart';
+import 'package:app_example/features/auth/impl/auth_repository_impl.dart';
+import 'package:app_example/features/auth/impl/datasource/auth_datasource.dart';
+import 'package:app_example/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:di/di.dart';
 import 'package:dio_network/dio_network.dart';
-import 'package:get_it/get_it.dart';
-
-import '../api/auth_repository.dart';
-import '../impl/auth_repository_impl.dart';
-import '../impl/datasource/auth_datasource.dart';
 
 
 final class AuthScope extends IsolatedScope {
@@ -30,5 +29,11 @@ final class AuthScope extends IsolatedScope {
       ),
       dispose: (r) => (r as AuthRepositoryImpl).dispose(),
     );
+    c.registerLazySingleton<AuthBloc>(
+    () => AuthBloc(
+      authRepository: c<AuthRepository>(),
+    ),
+    dispose: (b) => b.close(),
+  );
   }
 }

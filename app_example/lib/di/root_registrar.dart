@@ -1,4 +1,3 @@
-import 'package:app_example/analytics/analytics_service.dart';
 import 'package:app_example/di/root_registrar.config.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
@@ -25,6 +24,7 @@ final class RootRegistrar {
   }
 
   static List<void Function(GetIt)> warmUp() => [
-    (container) => container<AnalyticsService>(),
+    // Example warmup: pre-instantiate analytics service to start tracking app open event immediately.
+    // (container) => container<AnalyticsService>(),
   ];
 }
