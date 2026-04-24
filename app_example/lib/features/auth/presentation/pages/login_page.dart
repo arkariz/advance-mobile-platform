@@ -1,8 +1,6 @@
 import 'package:app_example/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:app_example/features/auth/presentation/bloc/auth_event.dart';
 import 'package:app_example/features/auth/presentation/bloc/auth_state.dart';
-import 'package:app_example/features/auth/presentation/effect/auth_effect_registry.dart';
-import 'package:app_example/features/auth/presentation/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:state_management/state_management.dart';
 
@@ -19,17 +17,6 @@ class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _obscurePassword = true;
-  late final EffectRegistry _registry;
-
-  @override
-  void initState() {
-    super.initState();
-    _registry = buildAuthEffectRegistry(
-      navigateRoutes: {
-        'home': (_) => const HomePage(),
-      },
-    );
-  }
 
   @override
   void dispose() {
@@ -52,7 +39,6 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: EffectListener<AuthBloc, AuthState>(
-        registry: _registry,
         child: BlocBuilder<AuthBloc, AuthState>(
           builder: (context, state) {
             final isLoading = state is AuthLoading;

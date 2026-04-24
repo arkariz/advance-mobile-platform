@@ -5,8 +5,15 @@ extension AuthSideEffect on AuthBloc {
   // NAVIGATION EFFECTS
   // ═══════════════════════════════════════════════════════════════════════════
 
-  NavigateGoEffect get _effectNavigateToHome => NavigateGoEffect(route: "home");
-  NavigateGoEffect get _effectNavigateToLogin => NavigateGoEffect(route: "login");
+  NavigatePushEffect get _effectNavigateToHome => NavigatePushEffect.withResult<String>(
+    keyId: HomeRouteKeys.home.id,
+    input: const HomeInput(),
+    onResult: (result) {
+      print('Navigated back from Home with result: $result');
+    },
+  );
+
+  NavigateGoEffect get _effectNavigateToLogin => NavigateGoEffect(keyId: AuthRouteKeys.login.id, input: const EmptyInput());
 
   // ═══════════════════════════════════════════════════════════════════════════
   // SNACKBAR EFFECTS

@@ -18,7 +18,7 @@ import 'root_module.dart' as _i126;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
-  Future<_i174.GetIt> $initAppGetIt({
+  Future<_i174.GetIt> $appInjectableInit({
     String? environment,
     _i526.EnvironmentFilter? environmentFilter,
   }) async {
