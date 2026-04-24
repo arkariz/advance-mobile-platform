@@ -11,8 +11,16 @@ typedef EffectHandler<T extends UiEffect> = void Function(
 class EffectRegistry {
   final Map<Type, EffectHandler<UiEffect>> _handlers = {};
 
-  /// Register handler for effect type T
+  /// Register handler for effect type [T].
+  ///
+  /// Throws [StateError] in debug mode if a handler for [T] is already
+  /// registered. Double-registration is always a programming error.
   void register<T extends UiEffect>(EffectHandler<T> handler) {
+    assert(
+      !_handlers.containsKey(T),
+      'A handler for $T is already registered. '
+      'registerEffectHandlers() must only be called once.',
+    );
     _handlers[T] = (context, effect) => handler(context, effect as T);
   }
 
