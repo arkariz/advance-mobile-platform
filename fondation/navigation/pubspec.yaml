@@ -1,0 +1,22 @@
+name: navigation
+description: "Modular, type-safe navigation framework for Flutter."
+version: 1.0.0
+publish_to: none
+
+resolution: workspace
+
+environment:
+  sdk: ^3.11.0
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  linter:
+    git:
+      url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
+      ref: linter-v1.0.2
