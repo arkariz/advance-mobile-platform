@@ -1,6 +1,6 @@
 name: navigation
 description: "Modular, type-safe navigation framework for Flutter."
-version: 1.0.0
+version: 1.1.0
 publish_to: none
 
 resolution: workspace
