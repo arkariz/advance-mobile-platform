@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2026-04-24
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - [`state_management` - `v2.0.0`](#state_management---v200)
+
+Packages with other changes:
+
+ - [`navigation` - `v1.1.0`](#navigation---v110)
+
+---
+
+#### `state_management` - `v2.0.0`
+
+ - **BREAKING** **FEAT**(state_management): enhance navigation effects with improved documentation and structure.
+
+#### `navigation` - `v1.1.0`
+
+ - **FEAT**(navigation): add navigation framework with modular structure and type-safe routing.
+
+
 ## 2026-04-23
 
 ### Changes

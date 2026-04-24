@@ -41,13 +41,13 @@ dependencies:
     git:
       url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
       path: fondation/navigation
-      ref: navigation-v1.0.0
+      ref: navigation-v1.1.0
   go_router: ^14.0.0
   state_management:
     git:
       url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
       path: fondation/state_management
-      ref: state_management-v1.1.0
+      ref: state_management-v2.0.0
 
 dev_dependencies:
   flutter_test:
