@@ -37,6 +37,12 @@ dependencies:
       url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
       path: core/failures
       ref: failures-v2.0.0
+  navigation:
+    git:
+      url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
+      path: fondation/navigation
+      ref: navigation-v1.0.0
+  go_router: ^14.0.0
   state_management:
     git:
       url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
