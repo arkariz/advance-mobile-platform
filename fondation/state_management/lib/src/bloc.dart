@@ -1,3 +1,4 @@
+export 'base/context/bloc_context.dart';
 export 'base/effect/autodismiss/autodismiss_effect.dart';
 export 'base/effect/interactive/interactive_effect.dart';
 export 'base/effect/navigation/navigation_effect.dart';
