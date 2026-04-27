@@ -86,18 +86,17 @@ final class TransferScope extends IsolatedScope {
   TransferScope({required super.parentContainer});
 
   @override
-  void bridge(GetIt parent, GetIt container) {
-    // Whitelist exactly the deps this scope needs from the parent
-    container.registerSingleton<UserSessionProvider>(
-      parent<UserSessionProvider>(),
-    );
+  void bridge(GetIt c) {
+    // Whitelist exactly the deps this scope needs from the parent.
+    // Access the parent container via `parent<T>()`.
+    c.registerSingleton<UserSessionProvider>(parent<UserSessionProvider>());
   }
 
   @override
-  void register(GetIt container) {
-    container.registerFactory<TransferViewModel>(() => TransferViewModel(
-      repository: container<TransferRepository>(),
-    ));
+  void register(GetIt c) {
+    c.registerFactory<TransferViewModel>(
+      () => TransferViewModel(repository: c<TransferRepository>()),
+    );
   }
 }
 ```
@@ -151,8 +150,8 @@ dispose()
 ```dart
 // WRONG — forwarding parent wholesale defeats isolation
 @override
-void bridge(GetIt parent, GetIt container) {
-  container.registerSingleton<GetIt>(parent); // ← never do this
+void bridge(GetIt c) {
+  c.registerSingleton<GetIt>(parent); // ← never do this
 }
 
 // WRONG — accessing container before init

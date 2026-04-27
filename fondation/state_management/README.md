@@ -131,11 +131,23 @@ Registries can be created as `late final` in `initState` and reused — or extra
 
 ### EffectListener
 
-A widget that listens to state changes and dispatches effects through an `EffectRegistry`.
+A widget that listens to state changes and dispatches effects. By default it uses `globalEffectRegistry`, which is pre-configured at app startup with the platform-wide handlers:
 
 ```dart
+// Primary usage — relies on globalEffectRegistry
 EffectListener<AuthBloc, AuthState>(
-  registry: _registry,   // omit to use globalEffectRegistry
+  child: BlocBuilder<AuthBloc, AuthState>(
+    builder: (context, state) => ...,
+  ),
+)
+```
+
+For feature-specific overrides, supply an explicit registry:
+
+```dart
+// Override with a local registry (e.g., feature-specific navigation)
+EffectListener<AuthBloc, AuthState>(
+  registry: buildAuthEffectRegistry(),
   child: BlocBuilder<AuthBloc, AuthState>(
     builder: (context, state) => ...,
   ),
@@ -159,6 +171,77 @@ void main() {
 
 ---
 
+---
+
+### BlocContext
+
+`BlocContext<T>` holds data that a BLoC needs internally across events but that should **never be emitted** to the widget stream. It keeps `UiState` clean — no debug data, retry counts, or intermediate values leak to the UI.
+
+```dart
+// bloc/context/auth_context.dart
+final class AuthContext extends BlocContext<AuthContext> {
+  final String? pendingEmail;
+  final int retryCount;
+
+  const AuthContext({this.pendingEmail, this.retryCount = 0});
+
+  // Computed getter — derived from stored fields
+  bool get isLockedOut => retryCount > 3;
+
+  // Setter helpers — return a new instance (immutable)
+  AuthContext setPendingEmail(String email) => copyWith(pendingEmail: email);
+  AuthContext incrementRetryCount() => copyWith(retryCount: retryCount + 1);
+
+  @override
+  AuthContext copyWith({String? pendingEmail, int? retryCount}) {
+    return AuthContext(
+      pendingEmail: pendingEmail ?? this.pendingEmail,
+      retryCount: retryCount ?? this.retryCount,
+    );
+  }
+
+  @override
+  List<Object?> get props => [pendingEmail, retryCount];
+}
+```
+
+Usage inside a BLoC — store it as a field, update it by reassigning:
+
+```dart
+class AuthBloc extends Bloc<AuthEvent, AuthState> {
+  AuthBloc(...) : super(const AuthInitial()) {
+    _ctx = const AuthContext();
+    on<AuthSignInRequested>(_onSignIn);
+  }
+
+  late AuthContext _ctx;
+
+  Future<void> _onSignIn(
+      AuthSignInRequested event, Emitter<AuthState> emit) async {
+    if (_ctx.isLockedOut) {
+      emit(state.withEffect(
+          ShowSnackBarEffect(message: 'Too many retries. Try later.')));
+      return;
+    }
+    try {
+      _ctx = _ctx.setPendingEmail(event.email); // update context — not emitted
+      await _repo.signIn(email: event.email, password: event.password);
+      emit(AuthAuthenticated(effect: _effectNavigateToHome));
+    } on Failure catch (_) {
+      _ctx = _ctx.incrementRetryCount(); // track retry count internally
+      emit(state.withEffect(ShowSnackBarEffect(message: 'Sign in failed')));
+    }
+  }
+}
+```
+
+Key points:
+- `_ctx` is a plain BLoC field — it is **never** passed to `emit()`.
+- Widgets cannot observe `BlocContext` — it is completely invisible to the stream.
+- Because `BlocContext` extends `Equatable`, equality checks in tests are straightforward.
+
+---
+
 ## Typical file structure
 
 ```
@@ -167,9 +250,9 @@ features/auth/presentation/
 │   ├── auth_bloc.dart
 │   ├── auth_event.dart
 │   ├── auth_state.dart
-│   └── auth_side_effect.dart   ← part of auth_bloc.dart
-├── effect/
-│   └── auth_effect_registry.dart
+│   ├── auth_side_effect.dart   ← part of auth_bloc.dart
+│   └── context/
+│       └── auth_context.dart  ← BlocContext for this feature
 └── pages/
     ├── login_page.dart
     └── home_page.dart
@@ -186,23 +269,5 @@ extension AuthSideEffect on AuthBloc {
 
   ShowSnackBarEffect _effectAuthError(String message) =>
       ShowSnackBarEffect(message: message, severity: FeedbackSeverity.error);
-}
-```
-
-The registry is extracted into a shared factory when multiple pages handle the same effect types:
-
-```dart
-// auth_effect_registry.dart
-EffectRegistry buildAuthEffectRegistry({
-  Map<String, WidgetBuilder> navigateRoutes = const {},
-}) {
-  return EffectRegistry()
-    ..register<ShowSnackBarEffect>((context, effect) { ... })
-    ..register<NavigateGoEffect>((context, effect) {
-      final builder = navigateRoutes[effect.route];
-      if (builder != null) {
-        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: builder));
-      }
-    });
 }
 ```

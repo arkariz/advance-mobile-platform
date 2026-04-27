@@ -95,6 +95,8 @@ final registry = RouteRegistry.fromModules([
 
 ## Flutter Navigator Integration
 
+> **Platform default**: The mobile platform uses **GoRouter** as the router adapter. The `RouteNode` → GoRouter bridge is implemented in `route_node_go_router_ext.dart` in the app layer. The vanilla `Navigator` example below illustrates how the abstraction works — use it as a reference when building a new adapter, not as production navigation code.
+
 `package:navigation` has no dependency on any routing vendor. Below is an example using Flutter's built-in `Navigator` as the adapter.
 
 ### Adapt `RouteNode` → `Route`

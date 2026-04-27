@@ -11,10 +11,8 @@ This package is the **single dependency** for feature and data layers that perfo
 This package exists to solve:
 
 - Feature/data layers coupling directly to Dio or `dio_network`
-- Leaking implementation details (DioException, Dio types) into upper layers
+- Leaking implementation details (`DioException`, Dio types) into upper layers
 - Inconsistent API response parsing across features
-
-This package is the single source of truth for API-layer contracts.
 
 ---
 
@@ -22,14 +20,11 @@ This package is the single source of truth for API-layer contracts.
 
 This package provides:
 
-- Transport-contract models for consistent API parsing
-
-Models and contracts included:
-
-- `ObjectResponse<T>`
-- `PaginatedResponse<T>`
-- `PaginationResponse`
-- `ApiErrorResponse`
+- `NetworkCallHandler` — the transport-layer contract
+- `ObjectResponse<T>` — standard single-object API response wrapper
+- `PaginatedResponse<T>` — paginated API response wrapper
+- `PaginationResponse` — pagination metadata
+- `ApiErrorResponse` — standardized error response structure
 
 ---
 
@@ -40,22 +35,33 @@ This package does NOT provide:
 - HTTP client implementations (see `dio_network`)
 - Dio or Retrofit integrations
 - `DioBuilder` or `DioRestHandler` (implementation details in `dio_network`)
-- Repository abstractions
-- Domain entities
-- Business logic
-- Presentation models
+- Repository abstractions, domain entities, or business logic
 
 ---
 
 ## Architecture Position
 
-```text
+```
 Feature / Data Source
         ↓  depends on
    api_network          ← this package (contracts)
         ↑  implemented by
    dio_network          (Dio implementation — app/DI layer only)
 ```
+
+---
+
+## NetworkCallHandler Contract
+
+`NetworkCallHandler` is the single abstraction point for all HTTP calls. Your data source depends only on this interface, never on Dio error types:
+
+```dart
+abstract class NetworkCallHandler {
+  Future<T> handle<T>(Future<T> Function() apiCall);
+}
+```
+
+The handler executes the call, catches transport-layer exceptions, and maps them to `Failure` subtypes before they reach the repository.
 
 ---
 
@@ -69,14 +75,14 @@ import 'package:api_network/api_network.dart';
 class ProfileRemoteDataSource {
   ProfileRemoteDataSource({
     required this.client,
-    required this.rest,
+    required this.handler,
   });
 
-  final Dio client;            // injected — type comes from dio_network at app layer
-  final RestApiHandler rest;   // injected — DioRestHandler wired by DI
+  final Dio client;
+  final NetworkCallHandler handler; // injected — DioRestHandler wired by DI
 
   Future<ObjectResponse<ProfileDto>> getProfile() {
-    return rest.handle(() async {
+    return handler.handle(() async {
       final response = await client.get<Map<String, dynamic>>('/me');
       return ObjectResponse.fromJson(
         response.data!,
@@ -100,9 +106,9 @@ final dio = DioBuilder('https://api.example.com')
     .addHeader('Accept', 'application/json')
     .build();
 
-final rest = DioRestHandler();
+final handler = DioRestHandler();
 
-final dataSource = ProfileRemoteDataSource(client: dio, rest: rest);
+final dataSource = ProfileRemoteDataSource(client: dio, handler: handler);
 ```
 
 ### Catch only Failure in upper layers
@@ -110,7 +116,6 @@ final dataSource = ProfileRemoteDataSource(client: dio, rest: rest);
 ```dart
 try {
   final profile = await dataSource.getProfile();
-  // render profile
 } on Failure catch (failure) {
   // map failure to UI state or retry flow
 }
@@ -120,34 +125,30 @@ try {
 
 ## Dependency Rules
 
-Allowed dependencies:
+**Allowed** dependencies:
 
-- `failures` (for `RestApiHandler` and `Failure` contracts)
+- `failures` (for `Failure` types)
 - `dependencies` (for JSON annotation and serialization)
 
-Disallowed dependencies:
+**Disallowed** dependencies:
 
 - `dio_network` (implementation — would break the abstraction)
 - `dio` / `retrofit` directly
-- Feature packages
-- Domain packages
-- Presentation packages
+- Feature packages, domain packages, or presentation packages
 
 ---
 
 ## Breaking Change Policy
 
-Breaking changes require:
-
-- Major version bump
-- Consumer migration notes
-- Backend contract validation
+Breaking changes require a major version bump and consumer migration notes.
 
 Examples of breaking changes:
 
-- Renaming response fields
+- Renaming or removing response fields
 - Changing field types
-- Changing pagination contract
+- Changing the `NetworkCallHandler` contract signature
+- Changing pagination structure
+
 - Changing `RestApiHandler` signature
 - Removing exported symbols
 
