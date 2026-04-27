@@ -1,3 +1,7 @@
+## 1.3.2
+
+ - **DOCS**: update README files for improved clarity and structure across multiple packages.
+
 ## 1.3.1
 
  - Update a dependency to the latest release.
