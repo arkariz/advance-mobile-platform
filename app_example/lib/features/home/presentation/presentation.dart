@@ -1,5 +1,6 @@
 // bloc
 export 'package:app_example/features/home/presentation/bloc/home_bloc.dart';
+export 'package:app_example/features/home/presentation/bloc/state/home_state.dart';
 
 // navigation
 export 'package:app_example/features/home/presentation/navigation/home_route_module.dart';
