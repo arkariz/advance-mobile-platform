@@ -20,20 +20,28 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository _authRepository;
   StreamSubscription<User?>? _authStateSubscription;
 
+  AuthContext _context = const AuthContext();
+
 
   Future<void> _onSignInWithEmailRequested(
     AuthSignInWithEmailRequested event,
     Emitter<AuthState> emit,
   ) async {
+    _context = _context.setPendingEmail(event.email);
     emit(const AuthLoading(message: 'Signing in...'));
 
     try {
+      if (_context.isLockedOut) {
+        emit(AuthUnauthenticated(effect: _effectAuthError('Too many failed attempts. Please try again later.')));
+        return;
+      }
       final result = await _authRepository.signIn(
         email: event.email,
         password: event.password,
       );
       emit(AuthAuthenticated(result, effect: _effectNavigateToHome));
     } on Failure catch (failure) {
+      _context = _context.incrementRetryCount();
       emit(AuthUnauthenticated(effect: _effectAuthError(failure.message)));
     }
   }
