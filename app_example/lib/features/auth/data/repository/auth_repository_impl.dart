@@ -1,8 +1,6 @@
 import 'dart:async';
-
-import 'package:app_example/features/auth/api/auth_repository.dart';
-import 'package:app_example/features/auth/api/model/user.dart';
-import 'package:app_example/features/auth/impl/datasource/auth_datasource.dart';
+import 'package:app_example/features/auth/data/data.dart';
+import 'package:app_example/features/auth/domain/domain.dart';
 import 'package:injectable/injectable.dart';
 import 'package:api_network/api_network.dart';
 

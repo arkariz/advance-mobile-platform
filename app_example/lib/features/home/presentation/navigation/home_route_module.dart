@@ -1,4 +1,4 @@
-import 'package:app_example/features/home/navigation/home_route_keys.dart';
+import 'package:app_example/features/home/presentation/navigation/home_route_keys.dart';
 import 'package:app_example/features/home/presentation/bloc/home_bloc.dart';
 import 'package:app_example/features/home/presentation/pages/home_page.dart';
 import 'package:navigation/navigation.dart';

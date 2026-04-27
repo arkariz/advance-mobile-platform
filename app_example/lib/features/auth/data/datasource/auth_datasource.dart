@@ -1,4 +1,4 @@
-import 'package:app_example/features/auth/impl/response/user_response.dart';
+import 'package:app_example/features/auth/data/data.dart';
 import 'package:dependencies/dependencies.dart';
 import 'package:api_network/api_network.dart';
 
