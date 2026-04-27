@@ -3,75 +3,83 @@
 Core failure model for domain-safe error handling.
 
 This package provides a sealed `Failure` hierarchy, typed `FailureCode`s,
-observability metadata (`FailureDetails`), recovery hints (`RecoveryOptions`),
-and a `RestApiHandler` contract to map infrastructure exceptions before they
-cross into your domain layer.
+observability metadata (`FailureDetails`), and recovery hints (`RecoveryOptions`).
+
+---
 
 ## Features
 
-- Sealed `Failure` hierarchy for exhaustive handling.
-- Typed and extensible `FailureCode` values.
-- Optional metadata (`FailureDetails`) for logs and tracing.
-- Recovery strategy hints (`RecoveryOptions`) for UI/app logic.
-- `RestApiHandler` abstraction to keep repositories transport-agnostic.
+- Sealed `Failure` hierarchy for exhaustive, compile-time-safe handling
+- Typed and extensible `FailureCode` values
+- Optional metadata (`FailureDetails`) for logs and tracing
+- Recovery strategy hints (`RecoveryOptions`) for UI/app logic
+
+---
+
+## Failure Hierarchy
+
+```
+Failure (sealed)
+├── NetworkFailure      ← No internet, timeout, SSL error
+├── AuthenticationFailure ← HTTP 401, token expired
+└── ValidationFailure   ← HTTP 422, server-side validation rejection
+```
+
+Each `Failure` can carry:
+- `FailureCode` — machine-readable code for programmatic handling
+- `FailureDetails` — human-readable message for logging or display
+- `RecoveryOptions` — user-actionable steps (e.g., "Retry", "Log in again")
+
+---
 
 ## Usage
 
-### 1) Handle failures exhaustively
+### Handle failures exhaustively
 
 ```dart
 String messageFor(Failure failure) {
-	return switch (failure) {
-		NetworkFailure() => 'No internet connection',
-		AuthenticationFailure() => 'Please log in again',
-		ValidationFailure(:final fieldErrors)
-				when fieldErrors.isNotEmpty => fieldErrors.values.first.first,
-		_ => failure.userMessage ?? 'Something went wrong',
-	};
+  return switch (failure) {
+    NetworkFailure() => 'No internet connection',
+    AuthenticationFailure() => 'Please log in again',
+    ValidationFailure(:final fieldErrors)
+        when fieldErrors.isNotEmpty => fieldErrors.values.first.first,
+    _ => failure.userMessage ?? 'Something went wrong',
+  };
 }
 ```
 
-### 2) Use RestApiHandler in your data source
+### Catch `Failure` in a repository or BLoC
 
-`RestApiHandler` is the domain boundary for remote execution. Your data source
-depends only on this interface, not on Dio (or any other HTTP client) error
-types.
-
-```dart
-import 'package:dio/dio.dart';
-
-class AccountRemoteDataSource {
-	AccountRemoteDataSource({
-		required this.client,
-		required this.rest,
-	});
-
-	final Dio client;
-	final RestApiHandler rest;
-
-	Future<Map<String, dynamic>> getAccount() {
-		return rest.handle(() async {
-			final response = await client.get<Map<String, dynamic>>('/account');
-			return response.data ?? <String, dynamic>{};
-		});
-	}
-}
-```
-
-Call sites can catch only `Failure`:
+Network calls wrapped in `NetworkCallHandler.handle()` (from `api_network`) automatically map
+transport exceptions into `Failure` subtypes before they reach the repository:
 
 ```dart
 try {
-	final account = await remoteDataSource.getAccount();
-	// Use account
+  final account = await repository.getAccount();
 } on Failure catch (failure) {
-	// Render UI / trigger recovery based on failure type and recovery options
+  // Handle by type — exhaustive via sealed class
+  emit(state.withEffect(ShowSnackBarEffect(
+    message: failure.details?.message ?? 'Something went wrong',
+    severity: FeedbackSeverity.error,
+  )));
 }
 ```
 
-## RestApiHandler Implementations
+---
 
-This package defines only the `RestApiHandler` contract. Concrete network
-implementations live in infrastructure packages.
+## Architecture Position
 
-For Dio, see `DioRestHandler` in the `network` package.
+```
+BLoC / Use Case
+      ↑ catches Failure
+  Repository
+      ↑ throws Failure
+  NetworkCallHandler  ← maps DioException → Failure (in api_network/dio_network)
+      ↑ wraps
+  Retrofit datasource
+```
+
+This package defines only the `Failure` types. The `NetworkCallHandler` contract that
+maps transport exceptions to `Failure` lives in `api_network`. The concrete Dio
+implementation lives in `dio_network`.
+

@@ -1,103 +1,129 @@
 # Mobile Platform
 
-A modular **mobile platform repository** designed to support multiple applications through shared architecture, reusable components, and standardized development practices.
-
-This repository acts as the foundation for mobile apps by centralizing core logic, infrastructure integrations, and reusable packages.
+A Flutter monorepo that provides reusable, independently-versioned packages for state management, navigation, networking, dependency injection, and shared utilities. It enables consistent patterns across all applications built on top of it.
 
 ---
 
-## 🏗️ Architecture Overview
+## Tech Stack
 
-The project follows a modular and layered approach
-
-### Key Principles
-
-- Separation of Concerns (Core vs Infrastructure)
-- Reusability across multiple apps
-- Scalability for future features and apps
-- Consistency in architecture and coding standards
+| Tool | Version | Purpose |
+|------|---------|---------|
+| Flutter | 3.41.6 | UI framework |
+| Dart | 3.11.4 | Language |
+| Melos | 7.5.1 | Monorepo management |
+| FVM | Latest | Flutter SDK version manager |
 
 ---
 
-## 🚀 Tech Stack
+## Package Structure
 
-- Flutter 3.41.6 (managed via FVM)
-- Dart 3.11.4
-- Melos 7.5.1 (monorepo & package orchestration)
+The codebase is organized into five layers:
 
----
+```
+core/
+  failures/          ← Sealed Failure hierarchy (v2.0.0)
+  models/            ← Shared data structures: Paginated<T> (v1.1.1)
 
-## 📦 Monorepo Management (Melos)
+fondation/
+  state_management/  ← BLoC + one-shot Effect pattern (v2.0.0)
+  navigation/        ← Type-safe, vendor-agnostic routing (v1.1.0)
 
-This project uses Melos to manage multiple packages in a single repository.
+infrastructure/
+  network/
+    api_network/     ← NetworkCallHandler contract + response types (v1.2.1)
+    dio_network/     ← Dio implementation of NetworkCallHandler (v1.3.1)
 
-### Common Commands
+shared/
+  dependencies/      ← Centralized third-party version pinning (v1.3.0)
+  di/                ← DiBoot + IsolatedScope DI scaffolding (v1.1.0)
+  linter/            ← Shared very_good_analysis linting config (v1.0.2)
 
-- Bootstrap all packages  
-  melos bootstrap
+app_example/         ← Reference app demonstrating all platform patterns
+```
 
-- Run analyze across all packages  
-  melos run analyze
-
-- Run tests across all packages  
-  melos run test
-
-- Clean all packages  
-  melos run clean
-
----
-
-## 🎯 Flutter Version Management (FVM)
-
-We use FVM to ensure consistent Flutter SDK versions across the team.
-
-### Setup
-
-- Install FVM  
-  dart pub global activate fvm
-
-- Install Flutter version (defined in .fvmrc)  
-  fvm install 3.41.6
-
-- Use the configured Flutter version  
-  fvm use 3.41.6
-
-### Usage
-
-Always run Flutter commands through FVM:
-
-- fvm flutter pub get  
-- fvm flutter run  
-- fvm flutter test  
+**Dependency flow**: App → Foundation / Infrastructure → Core → Shared. No package may import from a layer above it.
 
 ---
 
-## ⚙️ Getting Started
+## Getting Started
 
-### 1. Clone Repository
+### 1. Install prerequisites
 
-git clone git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
+```bash
+dart pub global activate fvm
+dart pub global activate melos
+```
+
+### 2. Clone and set up
+
+```bash
+git clone <repository-url>
 cd mobile-platform
+```
 
-### 2. Setup Environment
+### 3. Install the correct Flutter SDK
 
-- Setup Flutter version  
-  fvm install 3.41.6 && fvm use 3.41.6
+```bash
+fvm install   # reads version from .fvm/fvm_config.json
+fvm use
+```
 
-- Install dependencies  
-  melos bootstrap  
+After this, use `fvm flutter` instead of `flutter` for all commands.
+
+### 4. Bootstrap with Melos
+
+```bash
+melos bootstrap
+```
+
+Installs all package dependencies across the monorepo and links local packages. Re-run whenever any `pubspec.yaml` changes.
+
+### 5. Verify the setup
+
+```bash
+melos run analyze
+melos run test
+```
+
+Both should complete with zero errors.
+
+### 6. Run the example app
+
+```bash
+cd app_example
+fvm flutter run
+```
 
 ---
 
-## 📁 Package Structure Guidelines
+## Common Commands
 
-Each module/package should follow:
-
-- Clear responsibility (no mixed concerns)
-- Minimal dependencies between layers
-- Reusable and testable design
+| Command | Purpose |
+|---------|---------|
+| `melos bootstrap` | Install all dependencies and link local packages |
+| `melos run analyze` | Run static analysis across all packages |
+| `melos run test` | Run unit tests across all packages |
+| `melos run build` | Run code generation (build_runner) across all packages |
+| `melos run clean` | Clean all package build artifacts |
+| `melos version` | Bump versions based on Conventional Commits and create Git tags |
+| `melos list --mermaid` | Print the package dependency graph as a Mermaid diagram |
 
 ---
+
+## IDE Setup
+
+**VS Code**: Install the Flutter and Dart extensions. Open the repository root as the workspace.
+
+**Android Studio / IntelliJ**: Open the repository root. The `.iml` files for each package are committed.
+
+> Configure your IDE to use the FVM-managed Flutter SDK at `.fvm/flutter_sdk` within the repository.
+
+---
+
+## Versioning
+
+Each package is independently versioned using semantic versioning. Use `melos version` to automate version bumps from Conventional Commits. See each package's `CHANGELOG.md` for history.
+
 
 ## 🤝 Contributing
 
