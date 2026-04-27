@@ -3,6 +3,53 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2026-04-27
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`api_network` - `v1.2.2`](#api_network---v122)
+ - [`di` - `v1.1.1`](#di---v111)
+ - [`dio_network` - `v1.3.2`](#dio_network---v132)
+ - [`failures` - `v2.0.1`](#failures---v201)
+ - [`navigation` - `v1.1.1`](#navigation---v111)
+ - [`state_management` - `v2.1.0`](#state_management---v210)
+
+---
+
+#### `api_network` - `v1.2.2`
+
+ - **DOCS**: update README files for improved clarity and structure across multiple packages.
+
+#### `di` - `v1.1.1`
+
+ - **DOCS**: update README files for improved clarity and structure across multiple packages.
+
+#### `dio_network` - `v1.3.2`
+
+ - **DOCS**: update README files for improved clarity and structure across multiple packages.
+
+#### `failures` - `v2.0.1`
+
+ - **DOCS**: update README files for improved clarity and structure across multiple packages.
+
+#### `navigation` - `v1.1.1`
+
+ - **DOCS**: update README files for improved clarity and structure across multiple packages.
+
+#### `state_management` - `v2.1.0`
+
+ - **FEAT**(state_management): add BlocContext class for internal BLoC data management.
+ - **DOCS**: update README files for improved clarity and structure across multiple packages.
+
+
 ## 2026-04-24
 
 ### Changes

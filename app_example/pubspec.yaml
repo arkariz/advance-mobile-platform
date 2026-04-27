@@ -16,7 +16,7 @@ dependencies:
     git:
       url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
       path: infrastructure/network/api_network
-      ref: api_network-v1.2.1
+      ref: api_network-v1.2.2
   dependencies:
     git:
       url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
@@ -26,28 +26,28 @@ dependencies:
     git:
       url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
       path: shared/di
-      ref: di-v1.1.0
+      ref: di-v1.1.1
   dio_network:
     git:
       url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
       path: infrastructure/network/dio_network
-      ref: dio_network-v1.3.1
+      ref: dio_network-v1.3.2
   failures:
     git:
       url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
       path: core/failures
-      ref: failures-v2.0.0
+      ref: failures-v2.0.1
   navigation:
     git:
       url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
       path: fondation/navigation
-      ref: navigation-v1.1.0
+      ref: navigation-v1.1.1
   go_router: ^14.0.0
   state_management:
     git:
       url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
       path: fondation/state_management
-      ref: state_management-v2.0.0
+      ref: state_management-v2.1.0
 
 dev_dependencies:
   flutter_test:
