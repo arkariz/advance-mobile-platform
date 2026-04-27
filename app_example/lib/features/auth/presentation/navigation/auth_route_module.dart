@@ -1,5 +1,4 @@
-import 'package:app_example/features/auth/navigation/auth_route_keys.dart';
-import 'package:app_example/features/auth/presentation/pages/login_page.dart';
+import 'package:app_example/features/auth/presentation/presentation.dart';
 import 'package:navigation/navigation.dart';
 
 final class AuthRouteModule extends FeatureRouteModule {

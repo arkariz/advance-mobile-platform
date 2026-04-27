@@ -1,11 +1,8 @@
 import 'dart:async';
 
-import 'package:app_example/features/auth/api/auth_repository.dart';
-import 'package:app_example/features/auth/api/model/user.dart';
-import 'package:app_example/features/auth/navigation/auth_route_keys.dart';
-import 'package:app_example/features/auth/presentation/bloc/auth_event.dart';
-import 'package:app_example/features/auth/presentation/bloc/auth_state.dart';
-import 'package:app_example/features/home/navigation/home_route_keys.dart';
+import 'package:app_example/features/auth/domain/domain.dart';
+import 'package:app_example/features/auth/presentation/presentation.dart';
+import 'package:app_example/features/home/presentation/presentation.dart';
 import 'package:failures/failures.dart';
 import 'package:navigation/navigation.dart';
 import 'package:state_management/state_management.dart';

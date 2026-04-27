@@ -1,7 +1,6 @@
 import 'package:api_network/api_network.dart';
-import 'package:app_example/features/auth/api/auth_repository.dart';
-import 'package:app_example/features/auth/impl/auth_repository_impl.dart';
-import 'package:app_example/features/auth/impl/datasource/auth_datasource.dart';
+import 'package:app_example/features/auth/data/data.dart';
+import 'package:app_example/features/auth/domain/domain.dart';
 import 'package:app_example/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:di/di.dart';
 import 'package:dio_network/dio_network.dart';

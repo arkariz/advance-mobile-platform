@@ -1,6 +1,4 @@
-import 'package:app_example/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:app_example/features/auth/presentation/bloc/auth_event.dart';
-import 'package:app_example/features/auth/presentation/bloc/auth_state.dart';
+import 'package:app_example/features/auth/presentation/presentation.dart';
 import 'package:flutter/material.dart';
 import 'package:state_management/state_management.dart';
 

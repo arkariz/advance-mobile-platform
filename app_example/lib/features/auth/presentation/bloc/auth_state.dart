@@ -1,4 +1,4 @@
-import 'package:app_example/features/auth/api/model/user.dart';
+import 'package:app_example/features/auth/domain/model/user.dart';
 import 'package:state_management/state_management.dart';
 
 sealed class AuthState extends UiState<AuthState> {

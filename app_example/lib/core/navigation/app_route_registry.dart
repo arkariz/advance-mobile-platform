@@ -1,7 +1,6 @@
-import 'package:app_example/features/auth/navigation/auth_route_keys.dart';
-import 'package:app_example/features/auth/navigation/auth_route_module.dart';
 import 'package:app_example/core/navigation/route_node_go_router_ext.dart';
-import 'package:app_example/features/home/navigation/home_route_module.dart';
+import 'package:app_example/features/auth/presentation/presentation.dart';
+import 'package:app_example/features/home/presentation/presentation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:navigation/navigation.dart';
