@@ -1,5 +1,7 @@
+//
+// ignore_for_file: avoid_equals_and_hash_code_on_mutable_classes
+
 import 'package:failures/failures.dart';
-import 'package:flutter/foundation.dart';
 
 /// Describes how the client should respond to a [Failure].
 ///
@@ -13,7 +15,6 @@ import 'package:flutter/foundation.dart';
 ///   showRetryDialog();
 /// }
 /// ```
-@immutable
 final class RecoveryOptions {
   /// Creates a [RecoveryOptions] with the given fields.
   const RecoveryOptions({
