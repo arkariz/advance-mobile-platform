@@ -9,7 +9,7 @@
 #   ENABLE_TEST                   "true" | "false"
 #   WEBHOOK_URL                   https://...  (optional)
 # Protected + Masked:
-#   CI_DEPLOY_TOKEN               used by versioning job to git push
+#   CI_VERSIONING_BOT_TOKEN               used by versioning job to git push
 #   REPORTER_BOT_TOKEN              Project Access Token (api scope) — used by coverage_comment to post MR notes
 # ─────────────────────────────────────────────────────────────────────────────
 # MR merge protection: Settings → General → Merge requests → "Pipelines must succeed"
