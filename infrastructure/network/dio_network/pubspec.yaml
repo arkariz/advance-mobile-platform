@@ -24,7 +24,7 @@ dependencies:
     git:
       url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
       path: core/failures
-      ref: failures-v2.0.1
+      ref: failures-v2.0.2
   flutter:
     sdk: flutter
   
