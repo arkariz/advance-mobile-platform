@@ -32,6 +32,8 @@ versioning:
     - |
       git remote set-url origin \
         "https://oauth2:${CI_VERSIONING_BOT_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git"
+    - git checkout -B "$CI_COMMIT_BRANCH"
+    - git branch --set-upstream-to="origin/$CI_COMMIT_BRANCH" "$CI_COMMIT_BRANCH"
     - melos bootstrap
   script:
     - melos version --yes
