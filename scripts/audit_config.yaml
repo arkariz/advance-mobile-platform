@@ -1,0 +1,73 @@
+# scripts/audit_config.yaml
+#
+# Konfigurasi untuk audit_dependencies.dart.
+# Edit file ini untuk mengubah perilaku audit TANPA menyentuh kode Dart.
+#
+# Setelah edit, jalankan ulang:
+#   dart run scripts/audit_dependencies.dart
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Paket yang dilewati (tidak diaudit)
+# ─────────────────────────────────────────────────────────────────────────────
+skip:
+  exact:
+    - sky_engine
+    - flutter_web_plugins
+    - flutter_test
+    - flutter_driver
+  prefix:
+    - flutter
+    - dart
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Threshold scoring
+# ─────────────────────────────────────────────────────────────────────────────
+thresholds:
+  # Kriteria 1: Last Update — bulan sejak rilis terakhir
+  update_excellent: 3      # ≤ N bulan → 3 poin
+  update_good: 6           # ≤ N bulan → 2 poin
+  update_acceptable: 12    # ≤ N bulan → 1 poin  |  > N bulan → 0 poin
+
+  # Kriteria 3: Pub Score (persentase dari max)
+  pub_score_excellent: 90  # ≥ N% → 2 poin
+  pub_score_good: 70       # ≥ N% → 1 poin  |  < N% → 0 poin
+
+  # Kriteria 4: Download/bulan
+  download_min: 10000      # < N download/bulan → 0 poin
+
+  # Batas status akhir (total skor 0–10)
+  score_healthy: 8         # ≥ N → HEALTHY
+  score_watch: 5           # ≥ N → WATCH
+  score_warning: 2         # ≥ N → WARNING  |  < N → CRITICAL
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Cache pub.dev responses
+# ─────────────────────────────────────────────────────────────────────────────
+cache:
+  enabled: true
+  ttl_hours: 24            # Data di cache dianggap stale setelah N jam
+  path: .dart_tool/audit_cache.json
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Paket yang diketahui deprecated / discontinued
+# Format: nama_paket: "catatan / alternatif"
+#
+# Paket di sini akan di-force ke status CRITICAL terlepas dari skor.
+# Update daftar ini setiap ada package baru yang discontinued.
+# ─────────────────────────────────────────────────────────────────────────────
+deprecated:
+  # Google → Community migrations
+  connectivity: "Gunakan connectivity_plus"
+  share: "Gunakan share_plus"
+  device_info: "Gunakan device_info_plus"
+  package_info: "Gunakan package_info_plus"
+  android_alarm_manager: "Discontinued oleh Google"
+  android_intent: "Discontinued oleh Google"
+
+  # Discontinued April 30, 2025 oleh Flutter team
+  flutter_markdown: "Discontinued April 2025 — tidak ada pengganti resmi"
+  flutter_adaptive_scaffold: "Discontinued April 2025"
+  flutter_image: "Discontinued April 2025"
+  css_colors: "Discontinued April 2025"
+  palette_generator: "Discontinued April 2025"
+  ios_platform_images: "Discontinued April 2025"
