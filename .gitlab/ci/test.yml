@@ -1,0 +1,134 @@
+# STAGE: test
+# unit_test - runs dart + flutter coverage sequentially via melos test:coverage:all.
+# Coverage gate on combined total.
+
+.test_base:
+  extends: [.dart_base, .cache_pull, .on_code_change, .melos_base]
+  stage: test
+  needs: [bootstrap]
+  after_script:
+    - pkill -f "dart" 2>/dev/null || true
+    - rm -rf .dart_tool/build .dart_tool/package_config_subset
+  artifacts:
+    expire_in: 7 days
+    paths:
+      - "**/coverage/lcov.info"
+      - "coverage/summary.env"
+      - "coverage/summary.tsv"
+    when: always
+
+unit_test:
+  extends: .test_base
+  script:
+    - |
+      if [ "$ENABLE_TEST" != "true" ]; then
+        echo "ENABLE_TEST=false — skipping."; exit 0
+      fi
+    - melos run test:coverage:all
+    - !reference [.coverage_calc, script]
+    - |
+      # Save coverage summary as artifact for coverage_comment
+      mkdir -p coverage
+      cp /tmp/coverage.env coverage/summary.env 2>/dev/null || true
+      cp /tmp/coverage_data.tsv coverage/summary.tsv 2>/dev/null || true
+    - |
+      # shellcheck source=/dev/null
+      . /tmp/coverage.env 2>/dev/null || { TOTAL=0; HIT=0; PCT=0; }
+      if [ "${UNIT_TEST_COVERAGE_THRESHOLD:-0}" -gt 0 ] 2>/dev/null; then
+        echo "────────────────────────────────────────────────────"
+        echo " Coverage Report"
+        echo "────────────────────────────────────────────────────"
+        while IFS=$'\t' read -r PKG P H T; do
+          printf "  %-45s %3d%%  (%d/%d lines)\n" "$PKG" "$P" "$H" "$T"
+        done < /tmp/coverage_data.tsv
+        echo "────────────────────────────────────────────────────"
+        if [ "$TOTAL" -gt 0 ]; then
+          printf "  %-45s %3d%%  (%d/%d lines)\n" "TOTAL (combined)" "$PCT" "$HIT" "$TOTAL"
+          echo "────────────────────────────────────────────────────"
+          echo "Coverage: ${PCT}%"
+          [ "$PCT" -lt "$UNIT_TEST_COVERAGE_THRESHOLD" ] && \
+            { echo "FAIL: ${PCT}% is below threshold (${UNIT_TEST_COVERAGE_THRESHOLD}%)"; exit 1; }
+          echo "PASS: coverage threshold met (${UNIT_TEST_COVERAGE_THRESHOLD}%)."
+        else
+          echo "No coverage data — skipping coverage gate."
+        fi
+      fi
+  coverage: '/Coverage: (\d+)%/'
+
+# Posts coverage breakdown as MR comment via GitLab API.
+# Requires REPORTER_BOT_TOKEN CI variable (Project Access Token, api scope).
+# allow_failure: true — comment failure must never block a pipeline.
+coverage_comment:
+  extends: .dart_base
+  stage: test
+  needs:
+    - job: unit_test
+      artifacts: true
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+  allow_failure: true
+  script:
+    - |
+      # Load pre-computed coverage summary from unit_test artifacts
+      TOTAL=0; HIT=0; PCT=0; ROWS=''
+      # shellcheck source=/dev/null
+      . ./coverage/summary.env 2>/dev/null || true
+      TAB=$(printf '\t')
+      if [ -f ./coverage/summary.tsv ]; then
+        while IFS="$TAB" read -r PKG P H T; do
+          ROWS="${ROWS}| \`${PKG}\` | ${P}% | ${H}/${T} |\n"
+        done < ./coverage/summary.tsv
+      fi
+
+      # Build markdown comment
+      STATUS=''
+      if [ "${UNIT_TEST_COVERAGE_THRESHOLD:-0}" -gt 0 ] && [ "${PCT:-0}" -ge "$UNIT_TEST_COVERAGE_THRESHOLD" ]; then
+        STATUS=":white_check_mark: Threshold met (>= ${UNIT_TEST_COVERAGE_THRESHOLD}%)"
+      elif [ "${UNIT_TEST_COVERAGE_THRESHOLD:-0}" -gt 0 ]; then
+        STATUS=":x: Below threshold (${PCT:-0}% < ${UNIT_TEST_COVERAGE_THRESHOLD}%)"
+      fi
+      if [ "${TOTAL:-0}" -gt 0 ]; then
+        {
+          printf '## :bar_chart: Coverage Report\n\n'
+          printf '| Package | Coverage | Lines |\n'
+          printf '|---------|:--------:|------:|\n'
+          printf '%b' "$ROWS"
+          printf '| **TOTAL** | **%s%%** | **%s/%s** |\n' "$PCT" "$HIT" "$TOTAL"
+          [ -n "$STATUS" ] && printf '\n%s\n' "$STATUS" || true
+        } > /tmp/mr_comment.md
+      else
+        printf '## :bar_chart: Coverage Report\n\nNo coverage data found.\n' > /tmp/mr_comment.md
+      fi
+
+      # Validate token is set
+      if [ -z "$REPORTER_BOT_TOKEN" ]; then
+        echo "ERROR: REPORTER_BOT_TOKEN is not set. Add it in Settings → CI/CD → Variables (uncheck Protected)."
+        exit 1
+      fi
+
+      # Delete previous coverage-bot comments (avoid grep pipeline failure with || fallback)
+      NOTES=$(curl --silent --show-error --header "PRIVATE-TOKEN: $REPORTER_BOT_TOKEN" \
+        "$CI_API_V4_URL/projects/$CI_PROJECT_ID/merge_requests/$CI_MERGE_REQUEST_IID/notes?per_page=100") || NOTES=''
+      if echo "$NOTES" | grep -q '"message":"401'; then
+        echo "ERROR: REPORTER_BOT_TOKEN is invalid or Protected. Check token scope (api) and uncheck Protected."
+        exit 1
+      fi
+      NOTE_IDS=$(echo "$NOTES" | grep -o '"id":[0-9]*' | grep -o '[0-9]*') || NOTE_IDS=''
+      for NOTE_ID in $NOTE_IDS; do
+        BODY=$(echo "$NOTES" | grep "\"id\":${NOTE_ID}" | grep -o '"body":"[^"]*"') || continue
+        echo "$BODY" | grep -q 'Coverage Report' || continue
+        curl --silent --request DELETE \
+          --header "PRIVATE-TOKEN: $REPORTER_BOT_TOKEN" \
+          "$CI_API_V4_URL/projects/$CI_PROJECT_ID/merge_requests/$CI_MERGE_REQUEST_IID/notes/$NOTE_ID" \
+          >/dev/null || true
+      done
+
+      # Post new comment
+      RESPONSE=$(curl --silent --show-error \
+        --request POST \
+        --header "PRIVATE-TOKEN: $REPORTER_BOT_TOKEN" \
+        "$CI_API_V4_URL/projects/$CI_PROJECT_ID/merge_requests/$CI_MERGE_REQUEST_IID/notes" \
+        --data-urlencode "body@/tmp/mr_comment.md")
+      echo "$RESPONSE" | grep -q '"id"' \
+        && echo "Coverage comment posted successfully." \
+        || echo "WARNING: Unexpected response: $RESPONSE"

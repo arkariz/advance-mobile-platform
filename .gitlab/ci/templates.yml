@@ -1,0 +1,83 @@
+# Shared job templates — extended by all stage jobs
+
+.dart_base:
+  image: "ghcr.io/cirruslabs/flutter:$FLUTTER_VERSION"
+
+# Reusable: creates .fvm/flutter_sdk symlink pointing to Flutter from the image.
+# Use via: !reference [.flutter_symlink, before_script]
+.flutter_symlink:
+  before_script:
+    - FLUTTER_BIN=$(which flutter)
+    - mkdir -p .fvm && ln -sfn "$(dirname $(dirname $FLUTTER_BIN))" .fvm/flutter_sdk
+
+# Pull-only cache: downstream jobs read, only bootstrap writes
+.cache_pull:
+  cache:
+    - key:
+        prefix: pub-$FLUTTER_VERSION
+        files:
+          - pubspec.yaml
+          - pubspec.lock
+      paths: [.pub-cache/, .dart_tool/]
+      policy: pull
+
+# Trigger: MR with Dart/pubspec changes, or direct push to main; never on tags
+.on_code_change:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      changes: &dart_changes
+        - "**/*.dart"
+        - "**/pubspec.yaml"
+        - pubspec.yaml
+        - pubspec.lock
+    - if: '$CI_COMMIT_BRANCH == "main" && $CI_COMMIT_TAG == null'
+      changes: *dart_changes
+    - when: never
+
+# Activates Melos, bootstraps, pre-warms Flutter tool, resolves $DIFF_BASE.
+#   MR pipeline → CI_MERGE_REQUEST_DIFF_BASE_SHA
+#   main push   → CI_COMMIT_BEFORE_SHA
+.melos_base:
+  before_script:
+    - !reference [.flutter_symlink, before_script]
+    - export PATH="$PUB_CACHE/bin:$PATH"
+    - command -v melos >/dev/null 2>&1 || dart pub global activate melos
+    - command -v format_coverage >/dev/null 2>&1 || dart pub global activate coverage
+    - '[ -d .dart_tool ] || melos bootstrap'
+    - |
+      if [ -n "$CI_MERGE_REQUEST_IID" ]; then
+        export DIFF_BASE="$CI_MERGE_REQUEST_DIFF_BASE_SHA"
+      else
+        export DIFF_BASE="${CI_COMMIT_BEFORE_SHA:-HEAD~1}"
+      fi
+      echo "Diff base: $DIFF_BASE"
+
+# Reusable: scans all lcov.info files, excludes *.g.dart & */generated/*,
+# and writes results to two tmp files for consumption by test/coverage jobs:
+#   /tmp/coverage.env       — sourceable: TOTAL=N HIT=N PCT=N
+#   /tmp/coverage_data.tsv  — one row per package: PKG<TAB>PCT<TAB>HIT<TAB>TOTAL
+# POSIX-compatible (no bash process substitution). Use via: !reference [.coverage_calc, script]
+.coverage_calc:
+  script:
+    - |
+      TOTAL=0; HIT=0
+      rm -f /tmp/coverage_data.tsv /tmp/lcov_files.txt
+      touch /tmp/coverage_data.tsv
+      find . -name "lcov.info" \
+        -not -path "./.fvm/*" -not -path "./.pub-cache/*" -not -path "*/build/*" \
+        | sort > /tmp/lcov_files.txt
+      while IFS= read -r f; do
+        PKG=$(echo "$f" | sed 's|/coverage/lcov.info||' | sed 's|^\./||')
+        STATS=$(awk -F, 'BEGIN{t=0;h=0}
+          /^SF:/{skip=($0~/\.g\.dart$/ || $0~/\/generated\//)}
+          /^DA:/ && !skip{t++; if($NF+0>0) h++}
+          END{printf "%d %d", t, h}' "$f")
+        T=${STATS%% *}; H=${STATS##* }; T=${T:-0}; H=${H:-0}
+        if [ "$T" -gt 0 ]; then
+          P=$((H * 100 / T))
+          printf '%s\t%s\t%s\t%s\n' "$PKG" "$P" "$H" "$T" >> /tmp/coverage_data.tsv
+        fi
+        TOTAL=$((TOTAL + T)); HIT=$((HIT + H))
+      done < /tmp/lcov_files.txt
+      PCT=0; [ "$TOTAL" -gt 0 ] && PCT=$((HIT * 100 / TOTAL))
+      printf 'TOTAL=%s\nHIT=%s\nPCT=%s\n' "$TOTAL" "$HIT" "$PCT" > /tmp/coverage.env

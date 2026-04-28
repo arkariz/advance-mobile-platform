@@ -1,0 +1,56 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# mobile-platform — GitLab CI/CD
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ── CI Variables ──────────────────────────────────────────────────────────────
+# Define in GitLab → Settings → CI/CD → Variables:
+#   FLUTTER_VERSION               e.g. "3.41.6"
+#   UNIT_TEST_COVERAGE_THRESHOLD  e.g. "80"  (integer %; 0 = skip gate)
+#   ENABLE_TEST                   "true" | "false"
+#   WEBHOOK_URL                   https://...  (optional)
+# Protected + Masked:
+#   CI_DEPLOY_TOKEN               used by versioning job to git push
+#   REPORTER_BOT_TOKEN              Project Access Token (api scope) — used by coverage_comment to post MR notes
+# ─────────────────────────────────────────────────────────────────────────────
+# MR merge protection: Settings → General → Merge requests → "Pipelines must succeed"
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Skip pipelines triggered by the versioning bot commit to prevent infinite loops.
+# Interruptible pipelines are auto-cancelled when a newer commit is pushed.
+workflow:
+  auto_cancel:
+    on_new_commit: interruptible
+    on_job_failure: all
+  rules:
+    - if: '$CI_COMMIT_MESSAGE =~ /^chore\(release\)/'
+      when: never
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_TAG'
+    - if: '$CI_COMMIT_BRANCH'
+
+default:
+  tags: [bci-runner]
+  interruptible: true
+
+variables:
+  # Infrastructure (tidak perlu di-override dari UI)
+  PUB_CACHE: "$CI_PROJECT_DIR/.pub-cache"
+  GIT_STRATEGY: clone
+  GIT_DEPTH: 0
+  WEBHOOK_URL: ""
+
+stages:
+  - setup
+  - validate
+  - test
+  - version
+  - release
+
+include:
+  - local: .gitlab/ci/templates.yml
+  - local: .gitlab/ci/setup.yml
+  - local: .gitlab/ci/validate.yml
+  - local: .gitlab/ci/test.yml
+  - local: .gitlab/ci/version.yml
+  - local: .gitlab/ci/release.yml
+
