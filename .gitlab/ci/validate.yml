@@ -1,0 +1,8 @@
+# STAGE: validate
+
+analyze:
+  extends: [.dart_base, .cache_pull, .on_code_change, .melos_base]
+  stage: validate
+  needs: [bootstrap]
+  script:
+    - melos run analyze

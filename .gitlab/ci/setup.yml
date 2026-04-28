@@ -1,0 +1,29 @@
+# STAGE: setup
+# Bootstraps Melos and warms pub cache.
+# Flutter SDK is provided by the job image (ghcr.io/cirruslabs/flutter).
+
+bootstrap:
+  extends: [.dart_base, .on_code_change]
+  stage: setup
+  cache:
+    - key:
+        prefix: pub-$FLUTTER_VERSION
+        files:
+          - pubspec.yaml
+          - pubspec.lock
+      paths: [.pub-cache/, .dart_tool/]
+      policy: pull-push
+  script:
+    - !reference [.flutter_symlink, before_script]
+    - export PATH="$PUB_CACHE/bin:$PATH"
+    - flutter --version
+    - dart pub global activate melos
+    - dart pub global activate coverage
+    - melos bootstrap
+  artifacts:
+    expire_in: 2 hours
+    paths:
+      - .pub-cache/
+      - "**/pubspec.lock"
+      - .melos_tool/
+    when: on_success

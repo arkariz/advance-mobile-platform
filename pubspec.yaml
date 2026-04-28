@@ -8,6 +8,7 @@ dev_dependencies:
   json_serializable: ^6.13.1
   melos: ^7.5.1
   retrofit_generator: ^10.2.5
+  test: ^1.29.0
 
 workspace:
   - app_example
@@ -18,6 +19,54 @@ workspace:
 
 melos:
   sdkPath: .fvm/flutter_sdk
+  packages:
+    - app_example
+    - core/**
+    - fondation/**
+    - infrastructure/**
+    - shared/**
   command:
     version:
       updateGitTagRefs: true
+  scripts:
+
+    # ── Maintenance ────────────────────────────────────────────────────────────
+    clear:
+      description: Remove build artifacts and generated files from all packages.
+      run: |
+        melos clean
+        melos exec --concurrency=1 --flutter -- flutter clean
+        melos exec --concurrency=6 -- rm -rf build/ .dart_tool/
+
+    # ── Code Quality ───────────────────────────────────────────────────────────
+    analyze:
+      description: Analyze packages, ordered by dependency graph. Set DIFF_BASE to scope to changed packages only (done automatically in CI).
+      run: melos exec --concurrency=6 --order-dependents ${DIFF_BASE:+--diff=$DIFF_BASE} -- dart analyze --fatal-infos --fatal-warnings .
+
+    # ── Tests ──────────────────────────────────────────────────────────────────
+    test:
+      description: Run unit tests for pure-Dart packages.
+      run: melos exec --concurrency=1 --fail-fast --order-dependents --dir-exists=test --no-flutter -- dart test --concurrency=6 --reporter=compact
+
+    test:flutter:
+      description: Run unit tests for Flutter-dependent packages (serialized to avoid startup lock).
+      run: melos exec --concurrency=1 --fail-fast --order-dependents --dir-exists=test --flutter -- flutter test --concurrency=6 --reporter=compact
+
+    test:all:
+      description: Run all unit tests (pure-Dart, then Flutter).
+      run: melos run test && melos run test:flutter
+
+    # ── Tests with Coverage ────────────────────────────────────────────────────
+    test:coverage:
+      description: Run tests with coverage for pure-Dart packages. Set DIFF_BASE to scope to changed packages only.
+      run: |
+        melos exec --concurrency=1 --fail-fast --order-dependents --dir-exists=test --no-flutter ${DIFF_BASE:+--diff=$DIFF_BASE} -- dart test --concurrency=6 --coverage=coverage --reporter=compact
+        melos exec --concurrency=6 --dir-exists=coverage --no-flutter -- dart pub global run coverage:format_coverage --lcov --in=coverage --out=coverage/lcov.info --report-on=lib
+
+    test:coverage:flutter:
+      description: Run tests with coverage for Flutter-dependent packages. Set DIFF_BASE to scope to changed packages only.
+      run: melos exec --concurrency=1 --fail-fast --order-dependents --dir-exists=test --flutter ${DIFF_BASE:+--diff=$DIFF_BASE} -- flutter test --coverage --reporter=compact
+
+    test:coverage:all:
+      description: Run all tests with coverage (pure-Dart, then Flutter).
+      run: melos run test:coverage && melos run test:coverage:flutter
