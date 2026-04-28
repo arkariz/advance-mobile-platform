@@ -1,3 +1,7 @@
+## 1.2.3
+
+ - **FIX**(api_network): remove unused flutter dependency.
+
 ## 1.2.2
 
  - **DOCS**: update README files for improved clarity and structure across multiple packages.

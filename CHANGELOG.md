@@ -15,6 +15,39 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`api_network` - `v1.2.3`](#api_network---v123)
+ - [`models` - `v1.1.2`](#models---v112)
+ - [`dio_network` - `v1.3.3`](#dio_network---v133)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `dio_network` - `v1.3.3`
+
+---
+
+#### `api_network` - `v1.2.3`
+
+ - **FIX**(api_network): remove unused flutter dependency.
+
+#### `models` - `v1.1.2`
+
+ - **FIX**(model): remove unused flutter dependency.
+
+
+## 2026-04-28
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`failures` - `v2.0.2`](#failures---v202)
 
 ---

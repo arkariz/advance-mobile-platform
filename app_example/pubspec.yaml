@@ -16,7 +16,7 @@ dependencies:
     git:
       url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
       path: infrastructure/network/api_network
-      ref: api_network-v1.2.2
+      ref: api_network-v1.2.3
   dependencies:
     git:
       url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
@@ -31,7 +31,7 @@ dependencies:
     git:
       url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
       path: infrastructure/network/dio_network
-      ref: dio_network-v1.3.2
+      ref: dio_network-v1.3.3
   failures:
     git:
       url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
