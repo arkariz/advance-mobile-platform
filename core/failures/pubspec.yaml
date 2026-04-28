@@ -1,6 +1,6 @@
 name: failures
 description: "A package that contains all the failure classes used in the project. This package is designed to be a centralized location for defining and managing failure types, making it easier to handle errors and exceptions throughout the application. By using this package, developers can ensure consistency in error handling and improve the maintainability of the codebase."
-version: 2.0.1
+version: 2.0.2
 
 resolution: workspace
 

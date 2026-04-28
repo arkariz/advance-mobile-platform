@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2026-04-28
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`failures` - `v2.0.2`](#failures---v202)
+
+---
+
+#### `failures` - `v2.0.2`
+
+ - **FIX**(failure): remove unused flutter dependency.
+
+
 ## 2026-04-27
 
 ### Changes

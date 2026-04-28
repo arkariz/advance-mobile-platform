@@ -24,7 +24,7 @@ dependencies:
     git:
       url: https://github.com/arkariz/advance-mobile-platform
       path: core/failures
-      ref: failures-v2.0.1
+      ref: failures-v2.0.2
   flutter:
     sdk: flutter
   
