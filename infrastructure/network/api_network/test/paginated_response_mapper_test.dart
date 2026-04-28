@@ -1,6 +1,6 @@
 import 'package:api_network/src/response/response.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:models/models.dart';
+import 'package:test/test.dart';
 
 void main() {
   late PaginatedResponseMapper mapper;
