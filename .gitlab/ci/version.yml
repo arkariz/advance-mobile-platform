@@ -36,7 +36,7 @@ versioning:
     - git branch --set-upstream-to="origin/$CI_COMMIT_BRANCH" "$CI_COMMIT_BRANCH"
     - melos bootstrap
   script:
-    - melos version --yes
+    - melos version --all --ignore="app_example" --yes
     - git push origin HEAD:main --follow-tags
   artifacts:
     expire_in: 1 day
