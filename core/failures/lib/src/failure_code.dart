@@ -1,7 +1,5 @@
 // public API already self-explanatory, no need for docs
-// ignore_for_file: public_member_api_docs
-
-import 'package:flutter/foundation.dart';
+// ignore_for_file: avoid_equals_and_hash_code_on_mutable_classes, public_member_api_docs
 
 /// Typed failure code identifying a specific error condition.
 ///
@@ -16,7 +14,6 @@ import 'package:flutter/foundation.dart';
 /// // Define feature-specific codes in your own package:
 /// const transferLimitExceeded = FailureCode('TRANSFER_LIMIT_EXCEEDED');
 /// ```
-@immutable
 final class FailureCode {
   /// Creates a [FailureCode] with the given string value.
   const FailureCode(this.value);
