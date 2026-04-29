@@ -1,0 +1,23 @@
+name: api_storage
+description: "Storage contract layer — exposes ports, serializers, and key model so feature/data layers do not depend on implementation packages like hive_storage."
+version: 1.0.0
+publish_to: none
+
+resolution: workspace
+
+environment:
+  sdk: ^3.11.0
+
+dependencies:
+  failures:
+    git:
+      url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
+      path: core/failures
+      ref: failures-v2.0.2
+
+dev_dependencies:
+  linter:
+    git:
+      url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
+      ref: linter-v1.0.2
+  test: any
