@@ -1,6 +1,6 @@
 name: api_storage
 description: "Storage contract layer — exposes ports, serializers, and key model so feature/data layers do not depend on implementation packages like hive_storage."
-version: 1.0.0
+version: 1.1.0
 publish_to: none
 
 resolution: workspace
