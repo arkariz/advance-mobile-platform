@@ -48,12 +48,27 @@ dependencies:
       url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
       path: fondation/state_management
       ref: state_management-v2.1.0
+  api_storage:
+    git:
+      url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
+      path: infrastructure/storage/api_storage
+      ref: api_storage-v1.0.0
+  hive_storage:
+    git:
+      url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
+      path: infrastructure/storage/hive_storage
+      ref: hive_storage-v1.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   build_runner: any
   injectable_generator: any
+  memory_storage:
+    git:
+      url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
+      path: infrastructure/storage/memory_storage
+      ref: memory_storage-v1.0.0
   retrofit_generator: any
   json_serializable: any
 

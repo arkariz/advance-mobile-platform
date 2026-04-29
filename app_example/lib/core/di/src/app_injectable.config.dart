@@ -10,10 +10,12 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:api_network/api_network.dart' as _i976;
+import 'package:api_storage/api_storage.dart' as _i461;
 import 'package:dio_network/dio_network.dart' as _i347;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
+import '../../storage/app_storage.dart' as _i676;
 import 'root_module.dart' as _i126;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -28,9 +30,27 @@ extension GetItInjectableX on _i174.GetIt {
       () => rootModule.sharedPreferences(),
       preResolve: true,
     );
+    await gh.singletonAsync<_i461.SecureStorage>(
+      () => rootModule.secureStorage(),
+      preResolve: true,
+    );
     gh.lazySingleton<_i347.Dio>(() => rootModule.dio());
     gh.lazySingleton<_i976.NetworkCallHandler>(
       () => rootModule.authNetworkCallHandler(),
+    );
+    await gh.singletonAsync<_i461.KeyValueStorage>(
+      () => rootModule.cacheKvStorage(),
+      instanceName: 'cache_kv',
+      preResolve: true,
+    );
+    await gh.singletonAsync<_i676.AppStorage>(
+      () => rootModule.appStorage(gh<_i461.SecureStorage>()),
+      preResolve: true,
+    );
+    await gh.singletonAsync<_i461.KeyValueStorage>(
+      () => rootModule.appKvStorage(),
+      instanceName: 'app_kv',
+      preResolve: true,
     );
     return this;
   }

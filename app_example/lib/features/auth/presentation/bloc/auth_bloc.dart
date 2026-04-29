@@ -13,6 +13,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc({required AuthRepository authRepository}) 
   :  _authRepository = authRepository,
     super(const AuthInitial()) {
+      on<AuthStarted>(_onStarted);
       on<AuthSignInWithEmailRequested>(_onSignInWithEmailRequested);
       on<AuthSignOutRequested>(_onSignOutRequested);
     }
@@ -21,6 +22,30 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   StreamSubscription<User?>? _authStateSubscription;
 
   AuthContext _context = const AuthContext();
+
+  /// Restores session state on cold start.
+  ///
+  /// 1. Shows cached user immediately for optimistic UI (if available).
+  /// 2. Verifies against secure storage as the authoritative source.
+  Future<void> _onStarted(
+    AuthStarted event,
+    Emitter<AuthState> emit,
+  ) async {
+    // Step 1: show cache instantly so UI is not blank.
+    final cached = await _authRepository.getCachedUser();
+    if (cached != null) {
+      emit(AuthAuthenticated(cached, effect: _effectNavigateToHome));
+      return;
+    }
+
+    // Step 2: authoritative check from secure storage.
+    final signedIn = await _authRepository.getSignedInUser();
+    if (signedIn != null) {
+      emit(AuthAuthenticated(signedIn, effect: _effectNavigateToHome));
+    } else {
+      emit(const AuthUnauthenticated());
+    }
+  }
 
 
   Future<void> _onSignInWithEmailRequested(

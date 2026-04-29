@@ -7,10 +7,13 @@ part 'home_event.dart';
 part 'home_side_effect.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  HomeBloc() : super(HomeState.initial()) {
+  HomeBloc({required AuthRepository authRepository}) : _authRepository = authRepository,
+  super(HomeState.initial()) {
     on<HomeLogoutRequested>(_onLogoutRequested);
     on<HomeInitializeRequested>(_initalize);
   }
+
+  final AuthRepository _authRepository;
 
   void _initalize(
     HomeInitializeRequested event,
@@ -23,10 +26,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     emit(state.setUser(user).setNotificationsCount(notificationsCount));
   }
 
-  void _onLogoutRequested(
+  Future<void> _onLogoutRequested(
     HomeLogoutRequested event,
     Emitter<HomeState> emit,
-  ) {
+  ) async {
+    await _authRepository.signOut();
     emit(state.withEffect(_effectLogout));
   }
 }
+
