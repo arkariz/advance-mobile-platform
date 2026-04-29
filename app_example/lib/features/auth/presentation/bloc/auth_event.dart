@@ -7,6 +7,14 @@ sealed class AuthEvent extends Equatable {
   List<Object?> get props => [];
 }
 
+/// Dispatched once when the auth feature initialises.
+///
+/// The Bloc will read secure storage to determine whether a session already
+/// exists and emit [AuthAuthenticated] or [AuthUnauthenticated] accordingly.
+class AuthStarted extends AuthEvent {
+  const AuthStarted();
+}
+
 /// Sign in with email and password
 class AuthSignInWithEmailRequested extends AuthEvent {
   final String email;

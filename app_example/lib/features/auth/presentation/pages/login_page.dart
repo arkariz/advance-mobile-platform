@@ -17,6 +17,14 @@ class _LoginPageState extends State<LoginPage> {
   bool _obscurePassword = true;
 
   @override
+  void initState() {
+    super.initState();
+    // Restore session on page mount. Bloc emits AuthAuthenticated immediately
+    // if a valid session exists (navigating away from login automatically).
+    context.read<AuthBloc>().add(const AuthStarted());
+  }
+
+  @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
