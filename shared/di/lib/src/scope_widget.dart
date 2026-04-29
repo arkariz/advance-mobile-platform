@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:di/src/isolated_scope.dart';
 import 'package:di/src/scope_provider.dart';
 import 'package:flutter/widgets.dart';
@@ -100,10 +102,10 @@ class _ScopeWidgetState<S extends IsolatedScope> extends State<ScopeWidget<S>> {
   bool _initialised = false;
 
   @override
-  Future<void> initState() async {
+  void initState() {
     super.initState();
     _scope = widget.create();
-    await _init();
+    unawaited(_init());
   }
 
   Future<void> _init() async {
@@ -112,8 +114,9 @@ class _ScopeWidgetState<S extends IsolatedScope> extends State<ScopeWidget<S>> {
   }
 
   @override
-  Future<void> dispose() async {
-    await _scope.dispose();
+  void dispose() {
+    // dispose() must be synchronous; fire the async cleanup without awaiting.
+    unawaited(_scope.dispose());
     super.dispose();
   }
 
