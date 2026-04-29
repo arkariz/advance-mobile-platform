@@ -1,0 +1,34 @@
+name: hive_storage
+description: "Hive CE-backed storage adapters — concrete implementations of KeyValueStorage and SecureStorage from api_storage."
+version: 1.0.0
+publish_to: none
+
+resolution: workspace
+
+environment:
+  sdk: ^3.11.0
+  flutter: ">=1.17.0"
+
+dependencies:
+  api_storage:
+    git:
+      url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
+      ref: api_storage-v1.0.0
+  failures:
+    git:
+      url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
+      path: core/failures
+      ref: failures-v2.0.2
+  flutter:
+    sdk: flutter
+  flutter_secure_storage: ^10.0.0
+  hive_ce: ^2.19.3
+  hive_ce_flutter: ^2.3.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  linter:
+    git:
+      url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
+      ref: linter-v1.0.2
