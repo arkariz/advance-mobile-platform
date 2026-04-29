@@ -3,6 +3,43 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2026-04-29
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`api_storage` - `v1.1.0`](#api_storage---v110)
+ - [`di` - `v1.1.2`](#di---v112)
+ - [`hive_storage` - `v1.1.0`](#hive_storage---v110)
+ - [`memory_storage` - `v1.1.0`](#memory_storage---v110)
+
+---
+
+#### `api_storage` - `v1.1.0`
+
+ - **FEAT**(api_storage): implement storage contract layer with serializers, models, and ports.
+
+#### `di` - `v1.1.2`
+
+ - **FIX**(di): make initState and dispose methods synchronous and handle async cleanup.
+
+#### `hive_storage` - `v1.1.0`
+
+ - **REFACTOR**(hive_storage): replace HiveStorageInitializer with direct Hive initialization and remove unused initializer.
+ - **FEAT**(hive_storage): add Hive CE-backed storage adapters with initialization and error mapping.
+
+#### `memory_storage` - `v1.1.0`
+
+ - **FEAT**(memory_storage): add in-memory storage adapters for testing with comprehensive documentation and tests.
+
+
 ## 2026-04-28
 
 ### Changes

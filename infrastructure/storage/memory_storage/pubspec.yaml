@@ -1,6 +1,6 @@
 name: memory_storage
 description: "In-memory storage adapters for testing — implements api_storage ports with a simple Map, no I/O, no dependencies."
-version: 1.0.0
+version: 1.1.0
 publish_to: none
 
 resolution: workspace
@@ -12,7 +12,7 @@ dependencies:
   api_storage:
     git:
       url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
-      ref: api_storage-v1.0.0
+      ref: api_storage-v1.1.0
 
 dev_dependencies:
   linter:
