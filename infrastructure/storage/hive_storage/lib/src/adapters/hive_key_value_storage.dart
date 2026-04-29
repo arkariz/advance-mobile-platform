@@ -3,7 +3,7 @@
 
 import 'package:api_storage/api_storage.dart';
 import 'package:failures/failures.dart';
-import 'package:hive_ce/hive.dart';
+import 'package:hive_ce_flutter/hive_ce_flutter.dart';
 import 'package:hive_storage/src/mappers/hive_failure_mapper.dart';
 
 /// [KeyValueStorage] adapter backed by a Hive CE [Box].
@@ -17,9 +17,22 @@ import 'package:hive_storage/src/mappers/hive_failure_mapper.dart';
 /// Every operation translates Hive exceptions into [PersistenceFailure].
 final class HiveKeyValueStorage implements KeyValueStorage {
   /// Creates a [HiveKeyValueStorage] wrapping the given Hive [box].
-  const HiveKeyValueStorage({required Box<String> box}) : _box = box;
+  const HiveKeyValueStorage._({required Box<String> box}) : _box = box;
 
   final Box<String> _box;
+
+  /// Opens (or creates) a Hive box and returns a corresponding [HiveKeyValueStorage].
+  ///
+  /// The box is initialized in the app's documents directory by default, but a custom path can be set via [Hive.init].
+  static Future<HiveKeyValueStorage> initialize({
+    String boxName = 'app_kv',
+  }) async {
+    await Hive.initFlutter();
+
+    final box = await Hive.openBox<String>(boxName);
+
+    return HiveKeyValueStorage._(box: box);
+  }
 
   @override
   Future<String?> read(String key) async {
