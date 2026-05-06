@@ -15,6 +15,27 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`state_management` - `v2.1.2`](#state_management---v212)
+
+---
+
+#### `state_management` - `v2.1.2`
+
+ - **FIX**(state_management): update dependency reference to v1.3.0 in pubspec.yaml.
+
+
+## 2026-05-06
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`hive_storage` - `v1.1.1`](#hive_storage---v111)
  - [`memory_storage` - `v1.1.1`](#memory_storage---v111)
  - [`state_management` - `v2.1.1`](#state_management---v211)
