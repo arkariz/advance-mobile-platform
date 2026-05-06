@@ -47,7 +47,7 @@ dependencies:
     git:
       url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
       path: fondation/state_management
-      ref: state_management-v2.1.1
+      ref: state_management-v2.1.2
   api_storage:
     git:
       url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
