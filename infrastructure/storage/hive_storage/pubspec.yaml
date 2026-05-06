@@ -13,6 +13,7 @@ dependencies:
   api_storage:
     git:
       url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
+      path: infrastructure/storage/api_storage
       ref: api_storage-v1.1.0
   failures:
     git:
