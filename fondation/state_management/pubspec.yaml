@@ -14,7 +14,7 @@ dependencies:
     git:
       url: https://github.com/arkariz/advance-mobile-platform
       path: shared/dependencies
-      ref: dependencies-v1.2.0
+      ref: dependencies-v1.3.0
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.1
