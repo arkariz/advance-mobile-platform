@@ -13,6 +13,7 @@ dependencies:
   api_storage:
     git:
       url: https://github.com/arkariz/advance-mobile-platform
+      path: infrastructure/storage/api_storage
       ref: api_storage-v1.1.0
   failures:
     git:
