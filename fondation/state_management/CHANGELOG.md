@@ -1,3 +1,7 @@
+## 2.1.1
+
+ - **FIX**(state_management): update path for shared dependencies in pubspec.yaml.
+
 ## 2.1.0
 
  - **FEAT**(state_management): add BlocContext class for internal BLoC data management.

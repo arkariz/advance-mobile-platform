@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2026-05-06
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`hive_storage` - `v1.1.1`](#hive_storage---v111)
+ - [`memory_storage` - `v1.1.1`](#memory_storage---v111)
+ - [`state_management` - `v2.1.1`](#state_management---v211)
+
+---
+
+#### `hive_storage` - `v1.1.1`
+
+ - **FIX**(hive_storage): correct path for api_storage dependency in pubspec.yaml.
+
+#### `memory_storage` - `v1.1.1`
+
+ - **FIX**(memory_storage): correct path for api_storage dependency in pubspec.yaml.
+
+#### `state_management` - `v2.1.1`
+
+ - **FIX**(state_management): update path for shared dependencies in pubspec.yaml.
+
+
 ## 2026-04-29
 
 ### Changes

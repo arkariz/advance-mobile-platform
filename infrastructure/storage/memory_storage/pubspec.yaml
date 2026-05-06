@@ -1,6 +1,6 @@
 name: memory_storage
 description: "In-memory storage adapters for testing — implements api_storage ports with a simple Map, no I/O, no dependencies."
-version: 1.1.0
+version: 1.1.1
 publish_to: none
 
 resolution: workspace
