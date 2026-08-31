@@ -3,6 +3,43 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2026-08-31
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`dependencies` - `v1.4.0`](#dependencies---v140)
+ - [`dio_network` - `v1.3.4`](#dio_network---v134)
+ - [`models` - `v1.1.3`](#models---v113)
+ - [`state_management` - `v2.1.3`](#state_management---v213)
+ - [`api_network` - `v1.2.4`](#api_network---v124)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `models` - `v1.1.3`
+ - `state_management` - `v2.1.3`
+ - `api_network` - `v1.2.4`
+
+---
+
+#### `dependencies` - `v1.4.0`
+
+ - **FEAT**(dependencies): update dio dependency version to ^5.11.0.
+
+#### `dio_network` - `v1.3.4`
+
+ - **FIX**(dio_network): add transformTimeout to NetworkFailure mapping.
+
+
 ## 2026-05-06
 
 ### Changes
