@@ -44,6 +44,7 @@ abstract final class DioFailureMapper {
   /// trace for error reporting.
   static Failure map(DioException exception, [StackTrace? stackTrace]) {
     return switch (exception.type) {
+      DioExceptionType.transformTimeout ||
       DioExceptionType.connectionTimeout ||
       DioExceptionType.sendTimeout ||
       DioExceptionType.receiveTimeout => NetworkFailure(
