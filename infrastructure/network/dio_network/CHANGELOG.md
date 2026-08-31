@@ -1,3 +1,7 @@
+## 1.3.4
+
+ - **FIX**(dio_network): add transformTimeout to NetworkFailure mapping.
+
 ## 1.3.3
 
  - Update a dependency to the latest release.

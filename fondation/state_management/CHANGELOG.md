@@ -1,3 +1,7 @@
+## 2.1.3
+
+ - Update a dependency to the latest release.
+
 ## 2.1.2
 
  - **FIX**(state_management): update dependency reference to v1.3.0 in pubspec.yaml.
