@@ -4,6 +4,7 @@ export 'base/effect/interactive/interactive_effect.dart';
 export 'base/effect/navigation/navigation_effect.dart';
 export 'base/effect/ui_effect.dart';
 export 'base/state/ui_state.dart';
+export 'effect/callback/callback_effect.dart';
 export 'effect/dialog/config/dialog_action_config.dart';
 export 'effect/dialog/dialog_effect.dart';
 export 'effect/effect_listener.dart';
