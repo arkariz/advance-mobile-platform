@@ -1,3 +1,7 @@
+## 2.2.0
+
+ - **FEAT**(callback_effect): add CallbackEffect to execute callback functions.
+
 ## 2.1.3
 
  - Update a dependency to the latest release.

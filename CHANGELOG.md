@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2026-09-08
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`state_management` - `v2.2.0`](#state_management---v220)
+
+---
+
+#### `state_management` - `v2.2.0`
+
+ - **FEAT**(callback_effect): add CallbackEffect to execute callback functions.
+
+
 ## 2026-08-31
 
 ### Changes
