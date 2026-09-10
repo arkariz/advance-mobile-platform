@@ -18,5 +18,5 @@ dev_dependencies:
     sdk: flutter
   linter:
     git:
-      url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
+      url: https://github.com/arkariz/advance-mobile-platform
       ref: linter-v1.0.2

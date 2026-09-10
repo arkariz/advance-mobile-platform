@@ -12,17 +12,17 @@ environment:
 dependencies:
   api_network:
     git:
-      url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
+      url: https://github.com/arkariz/advance-mobile-platform
       path: infrastructure/network/api_network
       ref: api_network-v1.2.4
   dependencies:
     git:
-      url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
+      url: https://github.com/arkariz/advance-mobile-platform
       path: shared/dependencies
       ref: dependencies-v1.4.0
   failures:
     git:
-      url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
+      url: https://github.com/arkariz/advance-mobile-platform
       path: core/failures
       ref: failures-v2.0.2
   flutter:
@@ -34,5 +34,5 @@ dev_dependencies:
     sdk: flutter
   linter:
     git:
-      url: git@gitlab.bankcapital.co.id:mobile-services/mobile-platform.git
+      url: https://github.com/arkariz/advance-mobile-platform
       ref: linter-v1.0.2
