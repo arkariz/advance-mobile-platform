@@ -13,7 +13,7 @@ dependencies:
     git:
       url: https://github.com/arkariz/advance-mobile-platform
       path: infrastructure/storage/api_storage
-      ref: api_storage-v1.1.0
+      ref: 275181ec7d43d423d5293ab676445a4e43a736ee  # api_storage-v1.1.0 + fix URL GitLab->GitHub
 
 dev_dependencies:
   linter:
