@@ -6,15 +6,14 @@ A Flutter monorepo that provides reusable, independently-versioned packages for 
 
 ## Documentation
 
-Centralized documentation is available on Notion:
+Documentation lives in this repository, not in an external tool:
 
-**[📱 Mobile Platform — Notion](https://www.notion.so/Mobile-Platform-4127703e10f54784aad6be8d328c4100)**
-
-| Section | Purpose |
-|---------|---------|
-| [🏛️ Architecture](https://www.notion.so/Architecture-34f69c872e0081a6a016f6c4964aea90) | Monorepo structure, layer design, package catalog, and design principles |
-| [🚀 Onboarding](https://www.notion.so/Onboarding-34f69c872e008122b3adf37ae856a98b) | Step-by-step guides to get set up and start contributing |
-| [📖 Developer Reference](https://www.notion.so/Developer-Reference-34f69c872e00816f87b5c31d90ddc5af) | In-depth guides for each major platform subsystem |
+| Section | Where |
+|---------|-------|
+| Architecture, layer design, package catalog | [Package Structure](#package-structure) below |
+| Getting set up | [Getting Started](#getting-started) below |
+| Per-package usage guides | Each package's own `README.md` (e.g. `core/failures/README.md`) |
+| Design decisions and trade-offs | Each package's `CHANGELOG.md` |
 
 ---
 
