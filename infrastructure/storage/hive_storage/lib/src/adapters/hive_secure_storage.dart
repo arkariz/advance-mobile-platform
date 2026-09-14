@@ -1,5 +1,4 @@
 // PersistenceFailure is a domain type, not an Exception/Error subclass by design.
-// ignore_for_file: only_throw_errors
 
 import 'dart:convert';
 

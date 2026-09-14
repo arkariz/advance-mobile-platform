@@ -18,7 +18,6 @@ import 'package:failures/failures.dart';
 ///   return response.data ?? <String, dynamic>{};
 /// });
 /// ```
-// ignore_for_file: only_throw_errors
 class DioRestHandler implements NetworkCallHandler {
   @override
   Future<T> handle<T>(Future<T> Function() apiCall) async {
