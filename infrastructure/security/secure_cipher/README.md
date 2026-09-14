@@ -1,4 +1,4 @@
-# security
+# secure_cipher
 
 Authenticated encryption and keyed hashing.
 
@@ -16,7 +16,7 @@ public class, and it is the safe one.
 ## Usage
 
 ```dart
-import 'package:security/security.dart';
+import 'package:secure_cipher/secure_cipher.dart';
 
 final cipher = SecureCipher(key: sessionKey);
 
@@ -35,7 +35,7 @@ ciphertext — surfaces as a thrown [`SecurityFailure`][failures] carrying
 a [`CryptoFailureCode`] or the shared `FailureCode.tamperedPayload`,
 never as a silently wrong string.
 
-[failures]: ../failures
+[failures]: ../../../core/failures
 
 ## What's intentionally not exposed
 
@@ -48,10 +48,10 @@ public API:
   but constructing them directly gives you *unauthenticated* AES or a
   bare HMAC — the exact footgun `SecureCipher` exists to prevent.
 - The GetIt module is gone entirely. `SecureCipher(key: ...)` takes its
-  key explicitly, like every other package in this monorepo's `core/` —
-  there's no hidden global registration to set up first, and no way to
-  end up asking "which key is active right now?" without an answer in
-  the caller's own code.
+  key explicitly, the same way this monorepo's other adapters take their
+  dependencies as constructor parameters — there's no hidden global
+  registration to set up first, and no way to end up asking "which key
+  is active right now?" without an answer in the caller's own code.
 
 If you need raw unauthenticated AES or a bare HMAC for interop with an
 external system, that's a deliberate exception to make in your own

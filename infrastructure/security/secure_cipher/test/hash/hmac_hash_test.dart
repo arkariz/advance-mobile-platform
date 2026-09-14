@@ -1,5 +1,5 @@
 import 'package:crypto/crypto.dart';
-import 'package:security/src/hash/hmac_hash.dart';
+import 'package:secure_cipher/src/hash/hmac_hash.dart';
 import 'package:test/test.dart';
 
 void main() {

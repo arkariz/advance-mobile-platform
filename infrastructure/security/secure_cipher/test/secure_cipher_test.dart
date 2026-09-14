@@ -1,5 +1,5 @@
 import 'package:failures/failures.dart';
-import 'package:security/security.dart';
+import 'package:secure_cipher/secure_cipher.dart';
 import 'package:test/test.dart';
 
 void main() {

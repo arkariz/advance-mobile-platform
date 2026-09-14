@@ -1,4 +1,4 @@
-name: security
+name: secure_cipher
 description: "Authenticated encryption (AES-256-CBC + HMAC-SHA256) and keyed hashing. Failures are reported via the shared Failure model instead of sentinel strings."
 version: 1.0.0
 

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:crypto/crypto.dart';
 import 'package:failures/failures.dart';
 
-import 'package:security/src/crypto_failure_code.dart';
+import 'package:secure_cipher/src/crypto_failure_code.dart';
 
 /// Computes an HMAC over UTF-8 text using a keyed hash algorithm.
 ///

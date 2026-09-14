@@ -1,6 +1,6 @@
 import 'package:failures/failures.dart';
-import 'package:security/src/crypto_failure_code.dart';
-import 'package:security/src/encryption/aes.dart';
+import 'package:secure_cipher/src/crypto_failure_code.dart';
+import 'package:secure_cipher/src/encryption/aes.dart';
 import 'package:test/test.dart';
 
 void main() {
