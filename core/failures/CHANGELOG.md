@@ -1,3 +1,7 @@
+## 2.0.3
+
+ - **FIX**(failure): implement Exception interface in Failure class.
+
 ## 2.0.2
 
  - **FIX**(failure): remove unused flutter dependency.

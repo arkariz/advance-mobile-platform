@@ -31,12 +31,12 @@ dependencies:
     git:
       url: https://github.com/arkariz/advance-mobile-platform
       path: infrastructure/network/dio_network
-      ref: dio_network-v1.3.4
+      ref: dio_network-v1.3.5
   failures:
     git:
       url: https://github.com/arkariz/advance-mobile-platform
       path: core/failures
-      ref: failures-v2.0.2
+      ref: failures-v2.0.3
   navigation:
     git:
       url: https://github.com/arkariz/advance-mobile-platform
@@ -52,12 +52,12 @@ dependencies:
     git:
       url: https://github.com/arkariz/advance-mobile-platform
       path: infrastructure/storage/api_storage
-      ref: api_storage-v1.1.0
+      ref: api_storage-v1.1.1
   hive_storage:
     git:
       url: https://github.com/arkariz/advance-mobile-platform
       path: infrastructure/storage/hive_storage
-      ref: hive_storage-v1.1.1
+      ref: hive_storage-v1.1.2
 
 dev_dependencies:
   flutter_test:
@@ -68,7 +68,7 @@ dev_dependencies:
     git:
       url: https://github.com/arkariz/advance-mobile-platform
       path: infrastructure/storage/memory_storage
-      ref: memory_storage-v1.1.1
+      ref: memory_storage-v1.1.2
   retrofit_generator: any
   json_serializable: any
 

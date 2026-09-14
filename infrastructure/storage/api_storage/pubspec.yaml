@@ -1,6 +1,6 @@
 name: api_storage
 description: "Storage contract layer — exposes ports, serializers, and key model so feature/data layers do not depend on implementation packages like hive_storage."
-version: 1.1.0
+version: 1.1.1
 publish_to: none
 
 resolution: workspace
@@ -13,7 +13,7 @@ dependencies:
     git:
       url: https://github.com/arkariz/advance-mobile-platform
       path: core/failures
-      ref: failures-v2.0.2
+      ref: failures-v2.0.3
 
 dev_dependencies:
   linter:

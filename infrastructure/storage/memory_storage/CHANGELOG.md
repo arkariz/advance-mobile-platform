@@ -1,3 +1,7 @@
+## 1.1.2
+
+ - Update a dependency to the latest release.
+
 ## 1.1.1
 
  - **FIX**(memory_storage): correct path for api_storage dependency in pubspec.yaml.
