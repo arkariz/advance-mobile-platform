@@ -32,7 +32,7 @@ import 'package:failures/failures.dart';
 ///   _                       => GenericErrorView(failure.userMessage),
 /// };
 /// ```
-sealed class Failure {
+sealed class Failure implements Exception {
   const Failure({
     required this.code,
     required this.message,
