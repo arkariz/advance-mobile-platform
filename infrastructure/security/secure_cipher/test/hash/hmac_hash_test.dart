@@ -1,5 +1,5 @@
 import 'package:crypto/crypto.dart';
-import 'package:security/src/hash/hmac_hash.dart';
+import 'package:secure_cipher/src/hash/hmac_hash.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -14,7 +14,7 @@ void main() {
     test('should compute HMAC-SHA256 hash correctly', () {
       const plainText = 'Hello, World!';
 
-      final result = hmacHash.compute(plainText: plainText, hashType: sha256);
+      final result = hmacHash.compute(plainText: plainText);
 
       expect(result, isNotEmpty);
       expect(
@@ -31,7 +31,6 @@ void main() {
       final sha1Result = hmacHash.compute(plainText: plainText, hashType: sha1);
       final sha256Result = hmacHash.compute(
         plainText: plainText,
-        hashType: sha256,
       );
       final sha512Result = hmacHash.compute(
         plainText: plainText,

@@ -1,6 +1,7 @@
-name: security
+name: secure_cipher
 description: "Authenticated encryption (AES-256-CBC + HMAC-SHA256) and keyed hashing. Failures are reported via the shared Failure model instead of sentinel strings."
 version: 1.0.0
+publish_to: none
 
 resolution: workspace
 
@@ -14,7 +15,7 @@ dependencies:
     git:
       url: https://github.com/arkariz/advance-mobile-platform
       path: core/failures
-      ref: failures-v2.0.2
+      ref: failures-v2.0.3
 
 dev_dependencies:
   linter:

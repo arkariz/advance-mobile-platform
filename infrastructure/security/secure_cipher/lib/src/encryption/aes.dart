@@ -5,7 +5,7 @@ import 'dart:typed_data';
 import 'package:aes_crypt_null_safe/aes_crypt_null_safe.dart';
 import 'package:failures/failures.dart';
 
-import 'package:security/src/crypto_failure_code.dart';
+import 'package:secure_cipher/src/crypto_failure_code.dart';
 
 /// Low-level AES-256-CBC encryption with a random IV per call.
 ///

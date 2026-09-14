@@ -1,5 +1,5 @@
 import 'package:failures/failures.dart';
-import 'package:security/security.dart';
+import 'package:secure_cipher/secure_cipher.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -33,7 +33,7 @@ void main() {
     test('token carries a 64-hex-char tag ahead of the ciphertext', () {
       final token = cipher.encrypt('secret');
       expect(token.length, greaterThan(64));
-      expect(RegExp(r'^[0-9a-f]{64}').hasMatch(token), isTrue);
+      expect(RegExp('^[0-9a-f]{64}').hasMatch(token), isTrue);
     });
 
     test(

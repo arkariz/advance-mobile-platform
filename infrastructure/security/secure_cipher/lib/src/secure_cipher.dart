@@ -1,7 +1,7 @@
 import 'package:failures/failures.dart';
 
-import 'package:security/src/encryption/aes.dart';
-import 'package:security/src/hash/hmac_hash.dart';
+import 'package:secure_cipher/src/encryption/aes.dart';
+import 'package:secure_cipher/src/hash/hmac_hash.dart';
 
 /// Authenticated encryption: AES-256-CBC + HMAC-SHA256 (encrypt-then-MAC).
 ///
