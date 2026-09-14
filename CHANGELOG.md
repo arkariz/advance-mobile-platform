@@ -15,6 +15,27 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`secure_cipher` - `v1.0.1`](#secure_cipher---v101)
+
+---
+
+#### `secure_cipher` - `v1.0.1`
+
+ - **REFACTOR**: move security -> infrastructure/security/secure_cipher.
+
+
+## 2026-09-14
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`failures` - `v2.0.3`](#failures---v203)
  - [`dio_network` - `v1.3.5`](#dio_network---v135)
  - [`hive_storage` - `v1.1.2`](#hive_storage---v112)
