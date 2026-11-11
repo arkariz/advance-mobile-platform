@@ -1,0 +1,8 @@
+## 1.0.0
+
+ - **FEAT**(firestore_storage): initial release — `FirestoreService` (CRUD, queries, pagination, real-time watch, batch writes, transactions, document-reference resolution helpers) and `FirestoreFailureCode`, adapted from an earlier standalone `firestore` package.
+ - **FIX**(firestore_storage): every method that talks to Firestore now reports failures via the shared `Failure` model (`mapFirestoreFailure`) instead of a raw `FirebaseException` — including the `watchDocument`/`watchCollection` streams' error channel, which the original left completely unwrapped.
+ - **FIX**(firestore_storage): `query`'s no-transformer fallback (`T is Map<String, dynamic> || T is DocumentData`) tested a reified `Type` object with `is`, which is always `false` — so it always threw `StateError`, even for `T == DocumentData`. Replaced with an actual type comparison (`T == DocumentData`).
+ - **FIX**(firestore_storage): `watchDocument` no longer routes through a `withConverter` that force-unwraps `doc.data()!` — the original crashed instead of emitting `null` when the watched document didn't exist, even though its own transformer branch checked `snapshot.exists`.
+ - **FIX**(firestore_storage): `runTransaction`'s retry loop now only retries on `FirebaseException` — the original's bare `catch (e)` retried (and silently swallowed, until attempts ran out) any exception thrown by the transaction handler, including application bugs unrelated to a Firestore write conflict.
+ - **BREAKING**: the barrel no longer re-exports all of `package:cloud_firestore/cloud_firestore.dart` — only the SDK types that appear in `FirestoreService`'s public signatures. The GetIt-based `FirestoreModule`/`configure()` wiring is also gone; construct `FirestoreService()` directly.

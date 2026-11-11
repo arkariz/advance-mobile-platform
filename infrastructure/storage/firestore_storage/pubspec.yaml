@@ -1,0 +1,28 @@
+name: firestore_storage
+description: "Firestore access with a clean, typed API. Firestore-SDK errors are reported via the shared Failure model, not raw FirebaseException."
+version: 1.0.0
+publish_to: none
+
+resolution: workspace
+
+environment:
+  sdk: ^3.11.0
+  flutter: ">=1.17.0"
+
+dependencies:
+  cloud_firestore: ^6.5.0
+  flutter:
+    sdk: flutter
+  failures:
+    git:
+      url: https://github.com/arkariz/advance-mobile-platform
+      path: core/failures
+      ref: failures-v2.0.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  linter:
+    git:
+      url: https://github.com/arkariz/advance-mobile-platform
+      ref: linter-v1.0.2
