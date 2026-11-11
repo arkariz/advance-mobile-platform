@@ -11,10 +11,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: "3.44.1"
-          channel: stable
+      - uses: dart-lang/setup-dart@v1
+
+      - name: Add pub-cache bin to PATH
+        run: echo "$HOME/.pub-cache/bin" >> "$GITHUB_PATH"
+
+      - name: Install FVM
+        run: dart pub global activate fvm
+
+      - name: Install and link the Flutter SDK pinned in .fvmrc
+        run: |
+          fvm install
+          fvm use --force --skip-pub-get
+
+      - name: Add the FVM-pinned Flutter SDK to PATH
+        run: echo "$PWD/.fvm/flutter_sdk/bin" >> "$GITHUB_PATH"
 
       - run: dart pub global activate melos
       - run: dart pub global activate coverage
